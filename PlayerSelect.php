@@ -8,7 +8,7 @@
     }
     
     // Form the SQL query (a SELECT query)
-    $sql="SELECT * FROM Persons (FirstN) VALUE ('$_POST[firstname]')";
+    $sql="SELECT * FROM People WHERE nameFirst='("$_POST[firstname]")'";
     if (!mysqli_query($con,$sql))
  
     {
