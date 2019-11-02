@@ -1,5 +1,10 @@
 <?php
-    include_once("./library.php"); // To connect to the database
+
+    $SERVER = 'cs4750.cs.virginia.edu';
+    $USERNAME = 'reg3dq';
+    $PASSWORD = 'Databases2019';
+    $DATABASE = 'reg3dq';
+    //include_once("./library.php"); // To connect to the database
     $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
     // Check connection
     if (mysqli_connect_errno())
