@@ -1,10 +1,6 @@
 <?php
 
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-//include_once("library.php")
+include_once("library.php")
 $firstname = filter_input(INPUT_POST, 'firstname');
 if (!empty($firstname)) {
     // Create Connection
