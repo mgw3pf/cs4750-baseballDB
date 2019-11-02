@@ -14,8 +14,11 @@ if (!empty($firstname)) {
         die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
     } else {
         $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
-        if ($conn->query($sql)) {
-            echo "A ha ha!";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo $row["nameLast"] . " " . $row["nameFirst"] . "<br>";
+            }
         } else {
             echo "Error: ". $sql ."<br>". $conn->error;
         }
