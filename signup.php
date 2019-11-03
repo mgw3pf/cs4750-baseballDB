@@ -59,7 +59,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="submit" value="Create Account">
+				
+				
+				<input type="submit" value="Create Account" id="submit" >
+				
 			</form>
 		<a href="login.php">Already have an account? Login!</a>
 		</div>
