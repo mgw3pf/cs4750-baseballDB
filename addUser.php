@@ -12,10 +12,13 @@
  ('$_POST[username]','$_POST[email]','$_POST[password]', '1')";
  if (!mysqli_query($con,$sql))
  {
- die('Error: ' . mysqli_error($con));
- }
- 
+  header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/signup.php');
+   mysqli_close($con);
+ exit; 
+}
+ else{
  mysqli_close($con);
  header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/');
  exit;
+}
 ?>
