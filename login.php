@@ -21,5 +21,6 @@
 				<input type="submit" value="Login">
 			</form>
 		</div>
+<a href="signup.php">New user? Signup now!</a>
 	</body>
 </html>
