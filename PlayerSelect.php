@@ -75,7 +75,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         <form action="PlayerSelect.php" method="post">
             First Name: <input type="text" name="firstname">
             <!-- Last Name: <input type="text" name="lastname"> -->
-            <input type="Submit">
+            <input type="Submit", value = "Search", name="Search">
+	    <input type="Submit", value = "Export to CSV", name="Export">
         </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
@@ -102,6 +103,10 @@ if (!empty($firstname)) {
         } else {
             echo "No Results found!";
         }
+	
+	if($_POST["Export"]){
+		echo "exporting coming soon";
+	}
         $conn->close();
     }
 } else {
