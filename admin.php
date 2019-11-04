@@ -96,7 +96,21 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
-  
+<header class = "w3-content w3-padding-64 w3-black w3-xlarge">
+  <?php
+	$sql = "SELECT username FROM user_role WHERE username!= '$username'";
+	$result = $conn->query($sql);
+	if($result->num_rows > 0) {
+		while ($row=$result->fetch_assoc()){
+			echo $row["username"] . "<br>";
+		}
+	}
+	else{
+		echo "No accounts to manage";
+	}
+	$conn->close();
+  ?>
+</header>
   
     <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
