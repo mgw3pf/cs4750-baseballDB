@@ -5,7 +5,7 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
         header("Location: login.php");
 }
 if (isset($_SESSION['username'])){
-	$username = $_SESSION['username'];
+        $username = $_SESSION['username'];
 }
 ?>
 
@@ -32,7 +32,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-<p> Welcome, <?php session_start(); echo $_SESSION['username'];?>!</p>  
+<p> Welcome, <?php session_start(); echo $_SESSION['username'];?>!</p>
 <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
@@ -41,31 +41,36 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-search w3-xxlarge"></i>
     <p>SEARCH</p>
   </a>
-  <a href="vote.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="vote.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-thumbs-up w3-xxlarge"></i>
     <p>VOTE</p>
   </a>
-  <a href="leaderboard.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="leaderboard.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-diamond w3-xxlarge"></i>
     <p>LEADERBOARD</p>
   </a>
 <?php
-	$SERVER = 'cs4750.cs.virginia.edu';
-	$USERNAME = 'reg3dq';
-	$PASSWORD = 'Databases2019';
-	$DATABASE = 'reg3dq';
-	$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-	 if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
+        $SERVER = 'cs4750.cs.virginia.edu';
+        $USERNAME = 'reg3dq';
+        $PASSWORD = 'Databases2019';
+        $DATABASE = 'reg3dq';
+        $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+         if (mysqli_connect_error()) {
+        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
     } else {
-	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
-	$result = $conn->query($sql);
-	if ($result->num_rows > 0){?>
-	<a href = "admin.php" class = "w3-bar-item w3-button w3-padding-large w3-hover-black">
-	<i class = "fa fa-address-book-o w3-xxlarge"></i>
-	<p>MANAGE ADMINS</p>
-	</a>
-	<?php }}?>
+    <p>This website was created using stats from Lahman's Baseball Database. You can search for players and teams based on various statistics as well as giv    <p>This website was created using stats from Lahman's Baseball Database. You can search for players and teams based on various statistics as well as giv    <hr style="width:200px" class="w3-opacity">
+    <h2 class="w3-text-light-grey">This Database</h2>
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+  <!-- About Section -->
+
+        $sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0){?>
+        <a href = "admin.php" class = "w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class = "fa fa-address-book-o w3-xxlarge"></i>
+        <p>MANAGE ADMINS</p>
+        </a>
+        <?php }}?>
   <a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-times-circle-o w3-xxlarge"></i>
     <p>LOG OUT</p>
@@ -88,7 +93,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>Stay tuned</p>
     <img src="https://wallpapercave.com/wp/xQdR1ot.jpg" alt="boy" class="w3-image" width="2000" height="1108">
   </header>
-
+  
 
     <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
