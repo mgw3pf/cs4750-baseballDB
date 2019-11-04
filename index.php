@@ -63,7 +63,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	if ($result->num_rows > 0){?>
 	<a href = "admin.php" class = "w3-bar-item w3-button w3-padding-large w3-hover-black">
 	<i class = "fa fa-address-book-o w3-xxlarge"></i>
-	<p>ADD ADMIN</p>
+	<p>MANAGE ADMINS</p>
 	</a>
 	<?php }}?>
   <a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
