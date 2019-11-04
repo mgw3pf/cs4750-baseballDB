@@ -55,16 +55,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   
     <h1>Search for Baseball Players by First Name!</h1>
         <BR>
-	<?php
-		$x = 1;
-		$y = 2;
-		if($x<$y){?>
         <form action="PlayerSelect.php" method="post">
             First Name: <input type="text" name="firstname">
             <!-- Last Name: <input type="text" name="lastname"> -->
             <input type="Submit">
         </form>
-<?php } ?>
 
  <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">

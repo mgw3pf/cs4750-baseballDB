@@ -39,6 +39,22 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 110px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 </style>
 <body class="w3-black">
 
@@ -96,6 +112,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
+<header class="w3-container w3-padding-32 w3-center w3-black">
+<h1 class = "w3-jumbo">Manage Admins</h1>
 <header class = "w3-content w3-padding-64 w3-black w3-xlarge">
   <?php
 	$sql = "SELECT username FROM user_role WHERE username!= '$username'";
@@ -122,5 +140,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- END PAGE CONTENT -->
 </div>
 </div>
+
 </body>
 </html>
