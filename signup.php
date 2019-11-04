@@ -14,7 +14,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 /* Set the width of the sidebar to 120px */
 .w3-sidebar {width: 150px;background: #222;}
 /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-#main {margin-left: 150px}
+#main {margin-left: 110px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
 </style>
@@ -46,15 +46,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 		<div class="w3-content w3-justify w3-text-grey w3-padding-64" id="signup">
 			<h1 class="w3-jumbo"><span class = "w3-hide-small">Create Account</h1>
 			<hr style="width:200px" class="w3-opacity">
+<?php print $errorMessage;?>
 			<form action="addUser.php" method="post">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
 				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="email">
-					<i class="fas fa-envelope"></i>
-				</label>
-				<input type="email" name="email" placeholder="Email" id="email" required>
 				<label for="password">
 					<i class="fas fa-lock"></i>
 				</label>

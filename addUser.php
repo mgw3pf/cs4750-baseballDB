@@ -7,9 +7,9 @@
  echo "Failed to connect to MySQL: " . mysqli_connect_error();
  }
  // Form the SQL query (an INSERT query)
- $sql="INSERT INTO user_role (username, email, password, role_id)
+ $sql="INSERT INTO user_role (username, password, role_id)
  VALUES
- ('$_POST[username]','$_POST[email]','$_POST[password]', '1')";
+ ('$_POST[username]','$_POST[password]', '1')";
  if (!mysqli_query($con,$sql))
  {
   header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/signup.php');
