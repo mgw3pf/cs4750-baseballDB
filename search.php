@@ -1,12 +1,9 @@
 <?PHP
-
 session_start();
-echo $_SESSION['login'];
 if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
-	header("Location: login.php");
+	header("Location: index.php");
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -30,33 +27,40 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="login.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-user-circle-o w3-xxlarge"></i>
-    <p>LOGIN</p>
+  <a href="search.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-search w3-xxlarge"></i>
+    <p>SEARCH</p>
+  </a>
+  <a href="vote.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-thumbs-up w3-xxlarge"></i>
+    <p>VOTE</p>
+  </a>
+  <a href="leaderboard.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-diamond w3-xxlarge"></i>
+    <p>LEADERBOARD</p>
+  </a>
+  <a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-times-circle-o w3-xxlarge"></i>
+    <p>LOG OUT</p>
+</a>
 </nav>
 
 <!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">Baseball Stats</h1>
-    <p>Search and vote for your favorite players</p>
-    <p>Please log in or create account to continue</p>
-    <img src="https://wallpapercave.com/wp/xQdR1ot.jpg" alt="boy" class="w3-image" width="2000" height="1108">
-  </header>
-
-  <!-- About Section -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-    <h2 class="w3-text-light-grey">This Database</h2>
-    <hr style="width:200px" class="w3-opacity">
-    <p>This website was created using stats from Lahman's Baseball Database. You can search for players and teams based on various statistics as well as give votes to your favorite player to get them on the leaderboard, or leave comments about players for others to see!
-    </p>
+<div class="w3-padding-large w3-center" id="main">
   
-    <!-- Footer -->
+    <h1>Search for Baseball Players by First Name!</h1>
+        <BR>
+        <form action="PlayerSelect.php" method="post">
+            First Name: <input type="text" name="firstname">
+            <!-- Last Name: <input type="text" name="lastname"> -->
+            <input type="Submit">
+        </form>
+
+ <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
     <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>
     <p class="w3-medium">Website by Robyn Guarriello, Mike Wood, Tate Haga, Aria Kumar, and Galen Palowitch
@@ -68,4 +72,3 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 </body>
 </html>
-

@@ -22,21 +22,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	<body class="w3-black">
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
-  </a>
-  <a href="#search" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-search w3-xxlarge"></i>
-    <p>SEARCH</p>
-  </a>
-  <a href="#vote" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-thumbs-up w3-xxlarge"></i>
-    <p>VOTE</p>
-  </a>
-  <a href="#leaderboard" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-diamond w3-xxlarge"></i>
-    <p>LEADERBOARD</p>
   </a>
   <a href="login.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-user-circle-o w3-xxlarge"></i>
