@@ -19,10 +19,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
 </style>
 	</head>
-	<body>
+	<body class="w3-black">
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
@@ -38,7 +38,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-diamond w3-xxlarge"></i>
     <p>LEADERBOARD</p>
   </a>
-  <a href="login.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="login.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-user-circle-o w3-xxlarge"></i>
     <p>LOGIN</p>
 </a>
