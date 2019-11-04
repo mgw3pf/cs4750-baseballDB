@@ -19,11 +19,13 @@ $count = mysqli_num_rows($result);
 if ($count == 1){
 session_start();
 $_SESSION['login'] = "1";
+$_SESSION['username'] = $username;
 header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/index.php');
 
 }else{
 session_start();
 $_SESSION['login']='';
+$_SESSION['username'] = '';
 header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/login.php');
 }
 }

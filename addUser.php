@@ -13,7 +13,8 @@
  if (!mysqli_query($con,$sql))
  {
   session_start();
-  $SESSION['login']="";
+  $_SESSION['login']="";
+  $_SESSION['username'] = '';
   header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/signup.php');
    mysqli_close($con);
  exit; 
@@ -22,6 +23,7 @@
  mysqli_close($con);
  session_start();
  $_SESSION['login']="1";
+ $_SESSION['username']=$_POST[username];
  header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/index.php');
  exit;
 }

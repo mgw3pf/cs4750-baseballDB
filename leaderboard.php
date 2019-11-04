@@ -29,7 +29,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+<p> Welcome, <?php session_start(); echo $_SESSION['username'];?>!</p>  
+<a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
