@@ -12,13 +12,17 @@
  ('$_POST[username]','$_POST[password]', '1')";
  if (!mysqli_query($con,$sql))
  {
+  session_start();
+  $SESSION['login']="";
   header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/signup.php');
    mysqli_close($con);
  exit; 
 }
  else{
  mysqli_close($con);
- header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/');
+ session_start();
+ $_SESSION['login']="1";
+ header('Location: https://cs4750.cs.virginia.edu/~reg3dq/cs4750-baseballDB/index.php');
  exit;
 }
 ?>
