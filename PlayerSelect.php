@@ -68,10 +68,15 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </a>
 </nav>
 <!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-<header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">Search Results</h1>
+<div class="w3-padding-large w3-center" id="main">
+  
+    <h1>Search for Baseball Players by First Name!</h1>
+        <BR>
+        <form action="PlayerSelect.php" method="post">
+            First Name: <input type="text" name="firstname">
+            <!-- Last Name: <input type="text" name="lastname"> -->
+            <input type="Submit">
+        </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
 $SERVER = 'cs4750.cs.virginia.edu';
