@@ -23,7 +23,7 @@ if (!empty($firstname)) {
 if($result->num_rows > 0){
 if($_POST["Export"]){
               header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=data.csv');
+header('Content-Disposition: attachment; filename=results.csv');
               $output = fopen("php://output", "w");
 	      $delimiter = ',';
 while($row = $result->fetch_assoc()){
@@ -125,17 +125,6 @@ if (!empty($firstname)) {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
-      if($_POST["Export"]){
-              header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=data.csv');
-              $output = fopen("php://output", "w");
-	      $delimiter = ',';
-while($row = $result->fetch_assoc()){
-			$lineData = array($row["nameFirst"], $row["nameLast"]);
-			fputcsv($output, $lineData, $delimiter);
-		}
-	      exit();
-        }
 	while($row = $result->fetch_assoc()) {
               echo $row["nameFirst"] . " " . $row["nameLast"] ." " .  "<br>";
           }
