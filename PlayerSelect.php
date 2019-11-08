@@ -126,7 +126,7 @@ if (!empty($firstname)) {
       $result = $conn->query($sql);
       if($result->num_rows > 0){
 	while($row = $result->fetch_assoc()) {
-              echo $row["nameFirst"] . " " . $row["nameLast"] ." " .  "<br>";
+              echo $row['nameFirst'] . " " . $row['nameLast'] ." ".  "<br>";
           }
       } else {
           echo "No Results found!";

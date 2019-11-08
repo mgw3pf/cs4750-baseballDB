@@ -84,9 +84,25 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">Page coming soon!</h1>
-    <p>Stay tuned</p>
-    <img src="https://wallpapercave.com/wp/xQdR1ot.jpg" alt="boy" class="w3-image" width="2000" height="1108">
+  <h1> LEADERBOARD </h1>
+<?php
+if (mysqli_connect_error()) {
+      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
+  } else {
+  $sql2 = "SELECT * FROM Players WHERE votes > 0 ORDER BY votes DESC";
+  $result2 = $conn->query($sql2);
+  $rank = 1;
+if ($result2->num_rows > 0){
+        while($row = $result2->fetch_assoc()) {
+	?><h2><?php echo $rank; ?></h2><?php
+	echo $row["nameFirst"] . " " . $row["nameLast"] ." (Votes: " . $row["votes"] . ") ";
+	$rank = $rank + 1; 
+}}
+else{
+	echo "No votes yet!";
+}
+$conn->close();
+}   ?>
   </header>
 
 
