@@ -116,11 +116,17 @@ tr:nth-child(even) {
 <h1 class = "w3-jumbo">Manage Admins</h1>
 <header class = "w3-content w3-padding-64 w3-black w3-xlarge">
   <?php
-	$sql = "SELECT username FROM user_role WHERE username!= '$username'";
+	$sql = "SELECT * FROM user_role WHERE username!= '$username'";
 	$result = $conn->query($sql);
 	if($result->num_rows > 0) {
 		while ($row=$result->fetch_assoc()){
-			echo $row["username"] . "<br>";
+			echo $row["username"] . ": " ;
+			if ($row["role_id"] == 1){
+				echo "<a href = 'makeAdmin.php?id=".$row["username"]."'>(make admin)</a><br>";
+			}
+			else{
+				echo "<a href = 'deleteAdmin.php?id=".$row["username"]."'>(remove admin)</a><br>";
+			}
 		}
 	}
 	else{
