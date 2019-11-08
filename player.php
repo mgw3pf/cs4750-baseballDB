@@ -6,8 +6,8 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
+$player = $_GET['id'];
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -80,11 +80,19 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <a href="#leaderboard" class="w3-bar-item w3-button" style="width:25% !important">LEADERBOARD</a>
   </div>
 </div>
+
+<?php
+	$playerDataQuery = "SELECT * FROM Players WHERE playerID = '$player'";
+	$playerData = $conn->query($playerDataQuery);
+	$playerDataRow = $playerData->fetch_assoc();
+?>
+
+
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">Page coming soon!</h1>
+    <h1 class="w3-jumbo"><span class="w3-hide-small"><?php echo $playerDataRow['nameFirst'] . " " . $playerDataRow['nameLast'] ?></h1>
     <img src="https://wallpapercave.com/wp/xQdR1ot.jpg" alt="boy" class="w3-image" width="2000" height="1108">
   </header>
   
