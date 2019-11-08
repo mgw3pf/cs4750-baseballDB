@@ -1,4 +1,4 @@
-<?php
+<?PHP
 session_start();
 if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 	header("Location: login.php");
@@ -6,36 +6,9 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-// include_once("library.php")
-$firstname = filter_input(INPUT_POST, 'firstname');
-if (!empty($firstname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-  if (mysqli_connect_error()) {
-      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-  } else {
-      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
-      $result = $conn->query($sql);
-if($result->num_rows > 0){
-if($_POST["Export"]){
-              header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=results.csv');
-              $output = fopen("php://output", "w");
-	      $delimiter = ',';
-while($row = $result->fetch_assoc()){
-			$lineData = array($row["nameFirst"], $row["nameLast"]);
-			fputcsv($output, $lineData, $delimiter);
-		}
-	      exit();
-        }
-}
-}
-}
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <title>Baseball Database</title>
@@ -97,45 +70,33 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>LOG OUT</p>
 </a>
 </nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#search" class="w3-bar-item w3-button" style="width:25% !important">SEARCH</a>
+    <a href="#vote" class="w3-bar-item w3-button" style="width:25% !important">VOTE</a>
+    <a href="#leaderboard" class="w3-bar-item w3-button" style="width:25% !important">LEADERBOARD</a>
+  </div>
+</div>
 <!-- Page Content -->
-<div class="w3-padding-large w3-center" id="main">
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">Page coming soon!</h1>
+    <img src="https://wallpapercave.com/wp/xQdR1ot.jpg" alt="boy" class="w3-image" width="2000" height="1108">
+  </header>
   
-    <h1>Search for Baseball Players by First Name!</h1>
-        <BR>
-        <form action="PlayerSelect.php" method="post">
-            First Name: <input type="text" name="firstname">
-            <!-- Last Name: <input type="text" name="lastname"> -->
-            <input type="Submit", value = "Search", name="Search">
-	    <input type="Submit", value = "Export to CSV", name="Export">
-        </form>
- <div class="w3-content w3-justify w3-black w3-padding-64">
-<?php
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-// include_once("library.php")
-$firstname = filter_input(INPUT_POST, 'firstname');
-if (!empty($firstname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-  if (mysqli_connect_error()) {
-      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-  } else {
-      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
-      $result = $conn->query($sql);
-      if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-		$name = $row['nameFirst'] . " " . $row['nameLast'];
-              echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
-          }
-      } else {
-          echo "No Results found!";
-      }
-      $conn->close();
-  }
-} else {
-  echo "Please enter a First Name!";
-  die();
-}
-?>
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>
+    <p class="w3-medium">Website by Robyn Guarriello, Mike Wood, Tate Haga, Aria Kumar, and Galen Palowitch
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>

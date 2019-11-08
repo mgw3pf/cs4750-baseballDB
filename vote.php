@@ -99,7 +99,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </nav>
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
-  
     <h1>Vote for Your Favorite Players!</h1>
     <h2>Search for players by first name!</h2>
         <BR>
@@ -138,3 +137,15 @@ if (!empty($firstname)) {
   die();
 }
 ?>
+ <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>
+    <p class="w3-medium">Website by Robyn Guarriello, Mike Wood, Tate Haga, Aria Kumar, and Galen Palowitch
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>
