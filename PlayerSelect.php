@@ -116,7 +116,7 @@ $PASSWORD = 'Databases2019';
 $DATABASE = 'reg3dq';
 // include_once("library.php")
 $firstname = filter_input(INPUT_POST, 'firstname');
-$lastname = filter_input(INPUT_POST, 'lastname')
+$lastname = filter_input(INPUT_POST, 'lastname');
 if (!empty($firstname)) {
   // Create Connection
   $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
