@@ -6,7 +6,7 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
-$SERVER = 'cs4750.cs.virginia.edu';
+  $SERVER = 'cs4750.cs.virginia.edu';
 	$USERNAME = 'reg3dq';
 	$PASSWORD = 'Databases2019';
 	$DATABASE = 'reg3dq';
@@ -65,7 +65,7 @@ tr:nth-child(even) {
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="search.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="search_index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-search w3-xxlarge"></i>
     <p>SEARCH</p>
   </a>
