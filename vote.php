@@ -63,11 +63,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="search.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="search.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-search w3-xxlarge"></i>
     <p>SEARCH</p>
   </a>
-  <a href="vote.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="vote.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-thumbs-up w3-xxlarge"></i>
     <p>VOTE</p>
   </a>
@@ -99,14 +99,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </nav>
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
-  
-    <h1>Search for Baseball Players by First Name!</h1>
+    <h1>Vote for Your Favorite Players!</h1>
+    <h2>Search for players by first name!</h2>
         <BR>
-        <form action="PlayerSelect.php" method="post">
+        <form action="vote.php" method="post">
             First Name: <input type="text" name="firstname">
             <!-- Last Name: <input type="text" name="lastname"> -->
             <input type="Submit", value = "Search", name="Search">
-	    <input type="Submit", value = "Export to CSV", name="Export">
         </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
@@ -126,8 +125,8 @@ if (!empty($firstname)) {
       $result = $conn->query($sql);
       if($result->num_rows > 0){
 	while($row = $result->fetch_assoc()) {
-		$name = $row['nameFirst'] . " " . $row['nameLast'];
-              echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
+              echo $row["nameFirst"] . " " . $row["nameLast"] ." Votes: " . $row["votes"] . " ";
+	      echo "<a href = 'userVote.php?id=".$row["playerID"]."'>(Vote!)</a><br>";
           }
       } else {
           echo "No Results found!";
@@ -135,7 +134,18 @@ if (!empty($firstname)) {
       $conn->close();
   }
 } else {
-  echo "Please enter a First Name!";
   die();
 }
 ?>
+ <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>
+    <p class="w3-medium">Website by Robyn Guarriello, Mike Wood, Tate Haga, Aria Kumar, and Galen Palowitch
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>
