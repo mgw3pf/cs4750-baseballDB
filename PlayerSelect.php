@@ -122,7 +122,7 @@ if (!empty($firstname)) {
   if (mysqli_connect_error()) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
-      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname' NATURAL JOIN SELECT * FROM Players WHERE nameLast = '$lastname'";
+      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname' INTERSECT SELECT * FROM Players WHERE nameLast = '$lastname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
 	while($row = $result->fetch_assoc()) {
