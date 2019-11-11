@@ -104,7 +104,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         <BR>
         <form action="PlayerSelect.php" method="post">
             First Name: <input type="text" name="firstname">
-            <!-- Last Name: <input type="text" name="lastname"> -->
+            Last Name: <input type="text" name="lastname">
             <input type="Submit", value = "Search", name="Search">
 	    <input type="Submit", value = "Export to CSV", name="Export">
         </form>
@@ -122,7 +122,7 @@ if (!empty($firstname)) {
   if (mysqli_connect_error()) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
-      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
+      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname' NATURAL JOIN SELECT * FROM Players WHERE nameLast = '$lastname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
 	while($row = $result->fetch_assoc()) {
@@ -135,7 +135,7 @@ if (!empty($firstname)) {
       $conn->close();
   }
 } else {
-  echo "Please enter a First Name!";
+  echo "Please enter a First or Last Name!";
   die();
 }
 ?>

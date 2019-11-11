@@ -72,13 +72,14 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
   
-    <h1>Search for Baseball Players by First Name!</h1>
-        <BR>
-        <form action="PlayerSelect.php" method="post">
-            First Name: <input type="text" name="firstname" id="firstname">
-            <!-- Last Name: <input type="text" name="lastname"> -->
-            <input type="Submit", value="Search", name="Search">
-	    <input type="Submit", value = "Export to CSV", name="Export">
+  <h1>Search for Baseball Players by First Name!</h1>
+  <BR>
+  <form action="PlayerSelect.php" method="post">
+    First Name: <input type="text" name="firstname" id="firstname">
+    Last Name: <input type="text" name="lastname" id="lastname">
+    <!-- Last Name: <input type="text" name="lastname"> -->
+    <input type="Submit", value="Search", name="Search">
+	  <input type="Submit", value = "Export to CSV", name="Export">
 	</form>
 
  <!-- Footer -->
