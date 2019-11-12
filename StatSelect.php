@@ -136,7 +136,7 @@ if (!empty($quantity)) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
       if ($tail == "greater") {
-        $sql = "SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting WHERE $stats > $quantity";
+        $sql = "SELECT nameFirst, nameLast FROM Players NATURAL JOIN Batting WHERE $stats > $quantity";
       } elseif ($tail == "fewer") {
         $sql = "SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting WHERE $stats < $quantity";
       } else {
@@ -145,8 +145,9 @@ if (!empty($quantity)) {
       $result = $conn->query($sql);
       if($result->num_rows > 0){
 	      while($row = $result->fetch_assoc()) {
-		    $name = $row['nameFirst'] . " " . $row['nameLast'];
-            echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a> ".$row["SUM($stats)"]." <br>";
+            echo $row;
+		    #$name = $row['nameFirst'] . " " . $row['nameLast'];
+            #echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a> ".$row["SUM($stats)"]." <br>";
         }
       } else {
         echo "No Results found!";
