@@ -128,7 +128,7 @@ $DATABASE = 'reg3dq';
 // include_once("library.php")
 $tail = filter_input(INPUT_POST, 'tail');
 $quantity = filter_input(INPUT_POST, 'quantity');
-$stats = filter_input(INPUT_POST, 'stats')
+$stats = filter_input(INPUT_POST, 'stats');
 if (!empty($quantity)) {
   // Create Connection
   $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
@@ -145,8 +145,8 @@ if (!empty($quantity)) {
       $result = $conn->query($sql);
       if($result->num_rows > 0){
 	      while($row = $result->fetch_assoc()) {
-		      $name = $row['nameFirst'] . " " . $row['nameLast'];
-          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a> ".$row["SUM($stats)"]." <br>";
+		    $name = $row['nameFirst'] . " " . $row['nameLast'];
+            echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a> ".$row["SUM($stats)"]." <br>";
         }
       } else {
         echo "No Results found!";
