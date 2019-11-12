@@ -83,12 +83,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         </select>
         <input type="number" name="quantity" id="quantity" min="0" max="10000">
         <select name="stats">
-            <option value="hr">Home Runs</option>
-            <option value="rbi">Runs Batted In</option>
-            <option value="bb">Walks</option>
-            <option value="sb">Stolen Bases</option>
+            <option value="HR">Home Runs</option>
+            <option value="RBI">Runs Batted In</option>
+            <option value="BB">Walks</option>
+            <option value="stolenBases">Stolen Bases</option>
         </select>
-        <input type="Submit", value="Search", name="Search">
+        <input type="Submit", value="Stat", name="Stat">
 	    <input type="Submit", value = "Export to CSV", name="Export">
     </form>
 
