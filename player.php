@@ -88,38 +88,24 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 	$AllstarQuery = "SELECT year, name, positionName FROM Allstar NATURAL JOIN Teams NATURAL JOIN Positions WHERE playerID = '$player' ORDER BY year DESC";
 	$AllstarData = $conn->query($AllstarQuery);
-	if($AllstarData->num_rows>0){
-	$AllstarDataRow = $AllstarData->fetch_assoc();}
 
-	$battingQuery = "SELECT year, name, positionName, battingGames, atBats, runs, hits, doubles, triples, HR, RBI, stolenBases, BB, strikeouts FROM Batting NATURAL JOIN Teams NATURAL JOIN Positions WHERE playerID = '$player'";
+	$battingQuery = "SELECT * FROM Batting NATURAL JOIN Teams WHERE playerID = '$player'";
 	$battingData = $conn->query($battingQuery);
-	if($battingData->num_rows>0){
-	$battingDataRow = $battingData->fetch_assoc();}
 
-	$fieldingQuery = "SELECT year, name, positionName, fieldingGames, assists, errors, doublePlays, oppStolenBases, oppCaughtStealing FROM Fielding NATURAL JOIN Teams NATURAL JOIN Positions WHERE playerID = '$player'";
+	$fieldingQuery = "SELECT year, name, position, fieldingGames, assists, errors, doublePlays FROM Fielding NATURAL JOIN Teams WHERE playerID = '$player'";
 	$fieldingData = $conn->query($fieldingQuery);
-	if($fieldingData->num_rows>0){
-	$fieldingDataRow = $fieldingData->fetch_assoc();}
 	
 	$HOFQuery = "SELECT year, inducted, category FROM HallOfFame WHERE playerID = '$player'";
 	$HOFData = $conn->query($HOFQuery);
-	if($HOFData->num_rows>0){
-	$HOFDataRow = $HOFData->fetch_assoc();}
 
 	$outfieldersQuery = "SELECT year, leftField, centerField, rightField FROM Outfielders WHERE playerID = '$player'";
 	$outfieldersData = $conn->query($outfieldersData);
-	if($outfieldersData->num_rows>0){
-	$outfieldersDataRow = $outfieldersData->fetch_assoc();}
 
 	$pitchingQuery = "SELECT year, name, wins, losses, pitchingGames, gamesStarted, completeGames, shutouts, saves, hits, earnedRuns, HR, BB, strikeouts, opponentsBattingAverage, ERA, runs FROM Pitching NATURAL JOIN Teams WHERE playerID = '$player'";
 	$pitchingData = $conn->query($pitchingQuery);
-	if($pitchingData->num_rows>0){
-	$pitchingDataRow = $pitchingData->fetch_assoc();}
 
 	$salaryQuery = "SELECT year, name, salary FROM Salaries NATURAL JOIN Teams WHERE playerID = '$player'";
 	$salaryData = $conn->query($salaryQuery);
-	if($salaryData->num_rows>0){
-	$salaryDataRow = $salaryData->fetch_assoc();}
 ?>
 
 
@@ -139,6 +125,42 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 		<p><?php echo $AllstarDataRow['year'] . " " . $AllstarDataRow['name'] . ";     Starting position: " . $AllstarDataRow['positionName'] ?></p><?php ;  
 	}
 	}
+
+	if($battingData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Batting Stats</h2><?php ;
+	while($battingDataRow = $battingData->fetch_assoc()){?>
+		<p><?php echo $battingDataRow['year'] . " " . $battingDataRow['name'] . ";  Games: " . $battingDataRow['battingGames'] . ", At Bats: " . $battingDataRow['atBats'] . ", Runs: " . $battingDataRow['runs'] . ", Hits: " . $battingDataRow['hits'] . ", 2B: ". $battingDataRow['doubles'] . ", 3B: " . $battingDataRow['triples'] . ", HR: " . $battingDataRow['HR'] . ", RBI: " . $battingDataRow['RBI'] . ", Stolen Bases: " . $battingDataRow['stolenBases'] . ", Walks: " . $battingDataRow['BB'] . ", Strikeouts: " . $battingDataRow['strikeouts'] ?></p><?php ;
+	}
+	}
+
+	if($fieldingData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Fielding Stats</h2><?php ;
+	while($fieldingDataRow = $fieldingData->fetch_assoc()){?>
+		<p><?php echo $fieldingDataRow['year'] . " " . $fieldingDataRow['name'] . "; Position: " . $fieldingDataRow['position'] . ", Games: " . $fieldingDataRow['fieldingGames'] . ", Assists: " . $fieldingDataRow['assists'] . ", Errors: " . $fieldingDataRow['errors'] . ", Double Plays: " . $fieldingDataRow['doublePlays'] ?></p><?php ;
+	}
+	}
+
+	if($HOFData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Hall of Fame</h2><?php ;
+	while($HOFDataRow= $HOFData->fetch_assoc()){?>
+		<p><?php echo $HOFDataRow['year'] . ", Inducted (Y/N): " . $HOFDataRow['inducted'] . ", Category: " . $HOFDataRow['category'] ?></p><?php ;
+	}
+	}
+
+	if($pitchingData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Pitching Stats</h2><?php ;
+	while($pitchingDataRow = $pitchingData->fetch_assoc()){?>
+		<p><?php echo $pitchingDataRow['year'] . " " . $pitchingDataRow['name'] . "; Wins: " . $pitchingDataRow['wins'] . ", Losses: " . $pitchingDataRow['losses'] . ", Games: " . $pitchingDataRow['pitchingGames'] . ", Games Started: " . $pitchingDataRow['gamesStarted'] . ", Complete Games: " . $pitchingDataRow['completeGames'] . ", Shutouts: " . $pitchingDataRow['shutouts'] . ", Saves: " . $pitchingDataRow['saves'] . ", Hits: " . $pitchingDataRow['hits'] . ", Earned Runs: " . $pitchingDataRow['earnedRuns'] . ", HR Given Up: " . $pitchingDataRow['HR'] . ", Walks Given Up: " . $pitchingDataRow['BB'] . ", Strikeouts: " . $pitchingDataRow['strikeouts'] . ", Opponents AVG: " . $pitchingDataRow['opponentsBattingAverage'] . ", ERA: " . $pitchingDataRow['ERA'] . ", Runs: " . $pitchingDataRow['runs'] ?></p><?php ;
+	}
+	}
+	
+	if($salaryData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Salaries</h2><?php ;
+	while($salaryDataRow = $salaryData->fetch_assoc()){?>
+	<p><?php echo $salaryDataRow['year'] . " " . $salaryDataRow['name'] . " Salary: $" . $salaryDataRow['salary'] ?></p><?php ;
+	}
+	}
+
 ?>
 </div>  
     <!-- Footer -->
