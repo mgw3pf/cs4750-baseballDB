@@ -88,8 +88,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
             <option value="bb">Walks</option>
             <option value="sb">Stolen Bases</option>
         </select>
-        Last Name: <input type="text" name="lastname" id="lastname">
-        <!-- Last Name: <input type="text" name="lastname"> -->
         <input type="Submit", value="Search", name="Search">
 	    <input type="Submit", value = "Export to CSV", name="Export">
     </form>
