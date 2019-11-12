@@ -71,15 +71,47 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
-  
+
+    <form action="StatSelect.php" method="post">
+        Select all players that have
+        <select name="tail">
+            <option value="greater">more than</option>
+            <option value="fewer">fewer than</option>
+            <option value="equal">exactly</option>
+        </select>
+        <input type="number" name="quantity" id="quantity" min="0" max="10000">
+        <select name="stats">
+            <option value="hr">Home Runs</option>
+            <option value="rbi">Runs Batted In</option>
+            <option value="bb">Walks</option>
+            <option value="sb">Stolen Bases</option>
+        </select>
+        Last Name: <input type="text" name="lastname" id="lastname">
+        <!-- Last Name: <input type="text" name="lastname"> -->
+        <input type="Submit", value="Search", name="Search">
+	    <input type="Submit", value = "Export to CSV", name="Export">
+    </form>
+
+
+<!--
+    <h1><strong>Search by Career Statistics</strong></h1>
+    <br>
+    <ul>
+        <li><h2><a href="stat_hr.php">Home Runs</a></h2></li>
+        <li><h2><a href="stat_rbi.php">Runs Batted In</a></h2></li>
+        <li><h2><a href="stat_avg.php">Batting Average</a></h2></li>
+        <li><h2><a href="stat_bb.php">Bases on Balls</a></h2></li>
+    </ul>
+
     <h1>Search for Baseball Players by Statistics</h1>
         <BR>
         <form action="PlayerSelect.php" method="post">
             First Name: <input type="text" name="firstname" id="firstname">
-            <!-- Last Name: <input type="text" name="lastname"> -->
+            Last Name: <input type="text" name="lastname">
             <input type="Submit", value="Search", name="Search">
 	    <input type="Submit", value = "Export to CSV", name="Export">
-	</form>
+    </form>
+    -->
 
  <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
