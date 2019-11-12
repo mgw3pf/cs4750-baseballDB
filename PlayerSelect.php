@@ -117,7 +117,43 @@ $DATABASE = 'reg3dq';
 // include_once("library.php")
 $firstname = filter_input(INPUT_POST, 'firstname');
 $lastname = filter_input(INPUT_POST, 'lastname');
-if (!empty($firstname)) {
+if (!empty($firstname) && empty($lastname)) {
+  // Create Connection
+  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+  if (mysqli_connect_error()) {
+      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
+  } else {
+      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
+      $result = $conn->query($sql);
+      if($result->num_rows > 0){
+	      while($row = $result->fetch_assoc()) {
+		      $name = $row['nameFirst'] . " " . $row['nameLast'];
+          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
+        }
+      } else {
+        echo "No Results found!";
+      }
+      $conn->close();
+  }
+} elseif (empty($firstname) && !empty($lastname)) {
+  // Create Connection
+  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+  if (mysqli_connect_error()) {
+      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
+  } else {
+      $sql = "SELECT * FROM Players WHERE nameLast = '$lastname'";
+      $result = $conn->query($sql);
+      if($result->num_rows > 0){
+	      while($row = $result->fetch_assoc()) {
+		      $name = $row['nameFirst'] . " " . $row['nameLast'];
+          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
+        }
+      } else {
+        echo "No Results found!";
+      }
+      $conn->close();
+  }  
+} elseif (!empty($firstname) && !empty($lastname)) {
   // Create Connection
   $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
   if (mysqli_connect_error()) {
@@ -126,12 +162,12 @@ if (!empty($firstname)) {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname' INTERSECT SELECT * FROM Players WHERE nameLast = '$lastname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-		$name = $row['nameFirst'] . " " . $row['nameLast'];
-              echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
-          }
+	      while($row = $result->fetch_assoc()) {
+		      $name = $row['nameFirst'] . " " . $row['nameLast'];
+          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
+        }
       } else {
-          echo "No Results found!";
+        echo "No Results found!";
       }
       $conn->close();
   }
