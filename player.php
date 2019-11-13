@@ -106,6 +106,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 	$salaryQuery = "SELECT year, name, salary FROM Salaries NATURAL JOIN Teams WHERE playerID = '$player'";
 	$salaryData = $conn->query($salaryQuery);
+
+	$commentsQuery = "SELECT comment FROM Comments WHERE playerID = '$player'";
+	$commentsData = $conn->query($commentsQuery);
 ?>
 
 
@@ -115,6 +118,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small"><?php echo $playerDataRow['nameFirst'] . " " . $playerDataRow['nameLast'] ?></h1>
     <h2 class="w3-large"><span class="w3-hide-small"><?php echo $playerDataRow['birthCountry']. "  " . $playerDataRow['weight'] . "lbs.  " . $playerDataRow['height'] . "in.  Bats: " . $playerDataRow['bats'] . "    Throws: " . $playerDataRow['throws'] ?></h2>
+    <?php echo "<a href = 'comment.php?id=".$playerDataRow["playerID"]."'>ADD COMMENT</a><br>";?>
   </header>
 
 <div class="w3-content w3-medium w3-justify w3-text-grey w3-padding-32">
@@ -158,6 +162,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 		<h2 class="w3-text-light-grey">Salaries</h2><?php ;
 	while($salaryDataRow = $salaryData->fetch_assoc()){?>
 	<p><?php echo $salaryDataRow['year'] . " " . $salaryDataRow['name'] . " Salary: $" . $salaryDataRow['salary'] ?></p><?php ;
+	}
+	}
+
+	if($commentsData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Comments</h2><?php ;
+	while($commentsDataRow=$commentsData->fetch_assoc()){?>
+	<p><?php echo $commentsDataRow['comment']?></p><?php ;
 	}
 	}
 
