@@ -169,7 +169,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 		<h2 class="w3-text-light-grey">Comments</h2><?php ;
 	while($commentsDataRow=$commentsData->fetch_assoc()){?>
 	<p><?php echo $commentsDataRow['comment']?></p><?php ;
+	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '9'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0){
 	echo "<a href = 'deleteComment.php?id=".$commentsDataRow['cID']."&p_id=".$playerDataRow["playerID"]."'>Delete Comment</a><br>";
+	}
 	}
 	}
 
