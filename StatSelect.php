@@ -111,10 +111,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         </select>
         <input type="number" name="quantity" id="quantity" min="0" max="10000">
         <select name="stats" id="stats">
-            <option value="hr">Home Runs</option>
-            <option value="rbi">Runs Batted In</option>
-            <option value="bb">Walks</option>
-            <option value="sb">Stolen Bases</option>
+            <option value="HR">Home Runs</option>
+            <option value="RBI">Runs Batted In</option>
+            <option value="BB">Walks</option>
+            <option value="stolenBases">Stolen Bases</option>
         </select>
         <input type="Submit", value="Search", name="Search">
 	    <input type="Submit", value = "Export to CSV", name="Export">
@@ -146,8 +146,9 @@ if (!empty($quantity)) {
       if($result->num_rows > 0){
         # echo "<table style='width:100%'><tr><th>First Name</th><th>Last Name</th><th>$stats</th></tr>";
 	      while($row = $result->fetch_assoc()) {
-		    $name = $row['nameFirst'] . " " . $row['nameLast'];
-            echo "<table><tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr></table>";
+		      $name = $row['nameFirst'] . " " . $row['nameLast'];
+          #echo "<table><tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr></table>";
+          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a>" . $row["SUM($stats)"];
         }
       } else {
         echo "No Results found!";
