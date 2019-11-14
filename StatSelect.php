@@ -53,6 +53,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 110px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+
+table, th, td {
+  border: 1px solid white;
+}
+
 </style>
 <body class="w3-black">
 
