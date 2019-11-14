@@ -56,6 +56,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 table, th, td {
   border: 1px solid white;
+}
+
+th, td {
   padding: 5px;
 }
 
@@ -153,14 +156,14 @@ if (!empty($quantity)) {
         echo "<table>";
         echo "<tr>";
         echo "<th>Name</th>";
-        echo "<th>$stats</th>";
+        echo "<th>" . $stats . "</th>";
         echo "</tr>";
 	      while($row = $result->fetch_assoc()) {
           $name = $row['nameFirst'] . " " . $row['nameLast'];
           echo "<tr>";
           #echo "<table><tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr></table>";
           echo "<td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td>";
-          echo "<td>$row["SUM($stats)"]</td>";
+          echo "<td>" . $row["SUM($stats)"] . "</td>";
           echo "</tr>";
         }
         echo "</table>";
