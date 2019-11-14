@@ -7,6 +7,7 @@ if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
 $player = $_GET['id'];
+include_once("./library.php");
 ?>
 
 <!DOCTYPE html>
@@ -49,11 +50,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>LEADERBOARD</p>
   </a>
   <?php
-	$SERVER = 'cs4750.cs.virginia.edu';
-	$USERNAME = 'reg3dq';
-	$PASSWORD = 'Databases2019';
-	$DATABASE = 'reg3dq';
-	$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	 if (mysqli_connect_error()) {
         die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
     } else {

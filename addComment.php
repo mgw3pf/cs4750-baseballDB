@@ -3,12 +3,9 @@ session_start();
 if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 	header("Location: login.php");
 }
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
 
-$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+include_once("./library.php");
+
 
 if(mysqli_connect_error()){
 	die('Connect Error ('. mysqli_connect_errno() .')' . mysqli_connect_error());
