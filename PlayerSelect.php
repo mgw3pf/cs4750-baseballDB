@@ -122,10 +122,18 @@ if (!empty($firstname) && empty($lastname)) {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
+        echo "<table>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "</tr>";
 	      while($row = $result->fetch_assoc()) {
-		      $name = $row['nameFirst'] . " " . $row['nameLast'];
-          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
+          $name = $row['nameFirst'] . " " . $row['nameLast'];
+          echo "<tr>";
+          echo "<td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td>";
+          echo "</tr>";
         }
+        echo "</table>";
+
       } else {
         echo "No Results found!";
       }
@@ -140,10 +148,17 @@ if (!empty($firstname) && empty($lastname)) {
       $sql = "SELECT * FROM Players WHERE nameLast = '$lastname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
+	      echo "<table>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "</tr>";
 	      while($row = $result->fetch_assoc()) {
-		      $name = $row['nameFirst'] . " " . $row['nameLast'];
-          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
+          $name = $row['nameFirst'] . " " . $row['nameLast'];
+          echo "<tr>";
+          echo "<td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td>";
+          echo "</tr>";
         }
+        echo "</table>";
       } else {
         echo "No Results found!";
       }
@@ -158,10 +173,17 @@ if (!empty($firstname) && empty($lastname)) {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname' INTERSECT SELECT * FROM Players WHERE nameLast = '$lastname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
+	      echo "<table>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "</tr>";
 	      while($row = $result->fetch_assoc()) {
-		      $name = $row['nameFirst'] . " " . $row['nameLast'];
-          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a><br>";
+          $name = $row['nameFirst'] . " " . $row['nameLast'];
+          echo "<tr>";
+          echo "<td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td>";
+          echo "</tr>";
         }
+        echo "</table>";
       } else {
         echo "No Results found!";
       }
