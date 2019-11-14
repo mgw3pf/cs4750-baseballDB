@@ -153,11 +153,11 @@ if (!empty($quantity)) {
       }
       $result = $conn->query($sql);
       if($result->num_rows > 0){
-        echo "<table>";
-        echo "<tr>";
-        echo "<th>Name</th>";
-        echo "<th>" . $stats . "</th>";
-        echo "</tr>";
+        #echo "<table>";
+        #echo "<tr>";
+        #echo "<th>Name</th>";
+        #echo "<th>" . $stats . "</th>";
+        #echo "</tr>";
 	      while($row = $result->fetch_assoc()) {
           $name = $row['nameFirst'] . " " . $row['nameLast'];
           echo "<tr>";
