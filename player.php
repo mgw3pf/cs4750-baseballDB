@@ -107,7 +107,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	$salaryQuery = "SELECT year, name, salary FROM Salaries NATURAL JOIN Teams WHERE playerID = '$player'";
 	$salaryData = $conn->query($salaryQuery);
 
-	$commentsQuery = "SELECT comment FROM Comments WHERE playerID = '$player'";
+	$commentsQuery = "SELECT comment, cID FROM Comments WHERE playerID = '$player'";
 	$commentsData = $conn->query($commentsQuery);
 ?>
 
@@ -169,6 +169,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 		<h2 class="w3-text-light-grey">Comments</h2><?php ;
 	while($commentsDataRow=$commentsData->fetch_assoc()){?>
 	<p><?php echo $commentsDataRow['comment']?></p><?php ;
+	echo "<a href = 'deleteComment.php?id=".$commentsDataRow['cID']."&p_id=".$playerDataRow["playerID"]."'>Delete Comment</a><br>";
 	}
 	}
 
