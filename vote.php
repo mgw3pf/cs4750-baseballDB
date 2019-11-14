@@ -107,10 +107,20 @@ if (!empty($firstname)) {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-              echo $row["nameFirst"] . " " . $row["nameLast"] ." Votes: " . $row["votes"] . " ";
-	      echo "<a href = 'userVote.php?id=".$row["playerID"]."'>(Vote!)</a><br>";
+        echo "<table>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "<th>Votes</th>";
+        echo "<th>Vote!</th>";
+        echo "</tr>";
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["nameFirst"] . " " . $row["nameLast"] ."</td>";
+            echo "<td>" . $row["votes"] . "</td>";
+            echo "<td><a href = 'userVote.php?id=".$row["playerID"]."'>(Vote!)</a></td>";
+            echo "</tr>";
           }
+        echo "</table>";
       } else {
           echo "No Results found!";
       }
