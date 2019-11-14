@@ -1,10 +1,13 @@
 <?PHP
 session_start();
 if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
-	header("Location: index.php");}
+	header("Location: login.php");
+}
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
+$player = $_GET['id'];
+include_once("./library.php");
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +32,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-<p> Welcome, <?php session_start(); echo $_SESSION['username'];?>!</p>
+  <p> Welcome, <?php session_start(); echo $_SESSION['username'];?>!</p>
   <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
@@ -46,8 +49,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-diamond w3-xxlarge"></i>
     <p>LEADERBOARD</p>
   </a>
-<?php
-	include_once("./library.php");
+  <?php
 	 if (mysqli_connect_error()) {
         die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
     } else {
@@ -65,19 +67,37 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </a>
 </nav>
 
-<!-- Page Content -->
-<div class="w3-padding-large w3-center" id="main">
-  
-    <h1>Search for Baseball Players by First Name!</h1>
-        <BR>
-        <form action="PlayerSelect.php" method="post">
-            First Name: <input type="text" name="firstname" id="firstname">
-            <!-- Last Name: <input type="text" name="lastname"> -->
-            <input type="Submit", value="Search", name="Search">
-	    <input type="Submit", value = "Export to CSV", name="Export">
-	</form>
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#search" class="w3-bar-item w3-button" style="width:25% !important">SEARCH</a>
+    <a href="#vote" class="w3-bar-item w3-button" style="width:25% !important">VOTE</a>
+    <a href="#leaderboard" class="w3-bar-item w3-button" style="width:25% !important">LEADERBOARD</a>
+  </div>
+</div>
 
- <!-- Footer -->
+<?php
+	$playerDataQuery = "SELECT * FROM Players WHERE playerID = '$player'";
+	$playerData = $conn->query($playerDataQuery);
+	$playerDataRow = $playerData->fetch_assoc();
+?>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small"><?php echo $playerDataRow['nameFirst'] . " " . $playerDataRow['nameLast'] ?></h1>
+    <h2 class="w3-large"><span class="w3-hide-small"><?php echo $playerDataRow['birthCountry']. "  " . $playerDataRow['weight'] . "lbs.  " . $playerDataRow['height'] . "in.  Bats: " . $playerDataRow['bats'] . "    Throws: " . $playerDataRow['throws'] ?></h2>
+  
+<form action="addComment.php?id=<?php echo "$player";?>" method="post">
+	Enter your comment here:<br>
+	<textarea rows = "5" cols = "50" name="comment" id="comment"></textarea></br>
+	<input type="Submit", value="Submit", name="Submit">
+</form>
+</header>
+</div>  
+    <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
     <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>
     <p class="w3-medium">Website by Robyn Guarriello, Mike Wood, Tate Haga, Aria Kumar, and Galen Palowitch

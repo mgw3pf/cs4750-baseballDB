@@ -6,15 +6,10 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-// include_once("library.php")
+include_once("./library.php");
 $firstname = filter_input(INPUT_POST, 'firstname');
 if (!empty($firstname)) {
   // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
   if (mysqli_connect_error()) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {

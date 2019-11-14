@@ -110,11 +110,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-// include_once("library.php")
+include_once("./library.php");
 $firstname = filter_input(INPUT_POST, 'firstname');
 if (!empty($firstname)) {
   // Create Connection
