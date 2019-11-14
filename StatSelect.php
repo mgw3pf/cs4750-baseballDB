@@ -144,9 +144,15 @@ if (!empty($quantity)) {
       }
       $result = $conn->query($sql);
       if($result->num_rows > 0){
+        echo "<table style='width:100%'>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>$stats</th>
+        </tr>"
 	      while($row = $result->fetch_assoc()) {
 		    $name = $row['nameFirst'] . " " . $row['nameLast'];
-            echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a> ".$row["SUM($stats)"]." <br>";
+            echo "<tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr>";
         }
       } else {
         echo "No Results found!";
