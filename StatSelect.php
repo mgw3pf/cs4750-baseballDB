@@ -149,7 +149,7 @@ if (!empty($quantity)) {
           <th>First Name</th>
           <th>Last Name</th>
           <th>$stats</th>
-        </tr>"
+        </tr>";
 	      while($row = $result->fetch_assoc()) {
 		    $name = $row['nameFirst'] . " " . $row['nameLast'];
             echo "<tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr>";
