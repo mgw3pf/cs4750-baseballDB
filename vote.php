@@ -41,6 +41,15 @@ while($row = $result->fetch_assoc()){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+
+table, th, td {
+  border: 1px solid white;
+}
+
+th, td {
+  padding: 5px;
+}
+
 .w3-row-padding img {margin-bottom: 12px}
 /* Set the width of the sidebar to 120px */
 .w3-sidebar {width: 150px;background: #222;}
