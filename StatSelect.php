@@ -148,7 +148,7 @@ if (!empty($quantity)) {
 	      while($row = $result->fetch_assoc()) {
 		      $name = $row['nameFirst'] . " " . $row['nameLast'];
           #echo "<table><tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr></table>";
-          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a>" . $row["SUM($stats)"];
+          echo "<a href = 'player.php?id=".$row["playerID"]."'>$name</a>" . $row["SUM($stats)"] . "<br>";
         }
       } else {
         echo "No Results found!";
