@@ -136,11 +136,11 @@ if (!empty($quantity)) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
       if ($tail == "greater") {
-        $sql = "SELECT nameFirst, nameLast FROM Players NATURAL JOIN Batting WHERE $stats > $quantity";
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` > $quantity ORDER BY `SUM($stats)` DESC";
       } elseif ($tail == "fewer") {
-        $sql = "SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting WHERE $stats < $quantity";
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` < $quantity ORDER BY `SUM($stats)` DESC";
       } else {
-        $sql = "SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting WHERE $stats = $quantity";
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` = $quantity ORDER BY `SUM($stats)` DESC";
       }
       $result = $conn->query($sql);
       if($result->num_rows > 0){
