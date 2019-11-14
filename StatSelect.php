@@ -138,21 +138,16 @@ if (!empty($quantity)) {
       if ($tail == "greater") {
         $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` > $quantity ORDER BY `SUM($stats)` DESC";
       } elseif ($tail == "fewer") {
-        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` < $quantity ORDER BY `SUM($stats)` DESC";
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` < $quantity ORDER BY `SUM($stats)` DESC";
       } else {
-        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` = $quantity ORDER BY `SUM($stats)` DESC";
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` = $quantity ORDER BY `SUM($stats)` DESC";
       }
       $result = $conn->query($sql);
       if($result->num_rows > 0){
-        echo "<table style='width:100%'>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>$stats</th>
-        </tr>";
+        # echo "<table style='width:100%'><tr><th>First Name</th><th>Last Name</th><th>$stats</th></tr>";
 	      while($row = $result->fetch_assoc()) {
 		    $name = $row['nameFirst'] . " " . $row['nameLast'];
-            echo "<tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr>";
+            echo "<table><tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr></table>";
         }
       } else {
         echo "No Results found!";
