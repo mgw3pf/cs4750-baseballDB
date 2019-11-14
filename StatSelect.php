@@ -145,7 +145,7 @@ if (!empty($quantity)) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
       if ($tail == "greater") {
-        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` > $quantity ORDER BY `SUM($stats)` DESC";
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` > $quantity ORDER BY `SUM($stats)` DESC";
       } elseif ($tail == "fewer") {
         $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` < $quantity ORDER BY `SUM($stats)` DESC";
       } else {
@@ -154,15 +154,15 @@ if (!empty($quantity)) {
       $result = $conn->query($sql);
       if($result->num_rows > 0){
         echo "<table>";
-        #echo "<tr>";
-        #echo "<th>Name</th>";
-        #echo "<th>" . $stats . "</th>";
-        #echo "</tr>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "<th>" . $stats . "</th>";
+        echo "</tr>";
 	      while($row = $result->fetch_assoc()) {
           $name = $row['nameFirst'] . " " . $row['nameLast'];
           echo "<tr>";
           #echo "<table><tr><td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td><td>$row["SUM($stats)"]</td></tr></table>";
-          echo "<td><a href = 'player.php?id=".$row["playerID"]."'>$name</a></td>";
+          echo "<td><a href = 'player.php?id=" . $row["playerID"] . "'>$name</a></td>";
           echo "<td>" . $row["SUM($stats)"] . "</td>";
           echo "</tr>";
         }
