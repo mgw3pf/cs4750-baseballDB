@@ -49,11 +49,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>LEADERBOARD</p>
   </a>
   <?php
-	$SERVER = 'cs4750.cs.virginia.edu';
-	$USERNAME = 'reg3dq';
-	$PASSWORD = 'Databases2019';
-	$DATABASE = 'reg3dq';
-	$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+	include_once("./library.php");
 	 if (mysqli_connect_error()) {
         die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
     } else {
@@ -85,6 +81,30 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	$playerDataQuery = "SELECT * FROM Players WHERE playerID = '$player'";
 	$playerData = $conn->query($playerDataQuery);
 	$playerDataRow = $playerData->fetch_assoc();
+
+	$AllstarQuery = "SELECT year, name, positionName FROM Allstar NATURAL JOIN Teams NATURAL JOIN Positions WHERE playerID = '$player' ORDER BY year DESC";
+	$AllstarData = $conn->query($AllstarQuery);
+
+	$battingQuery = "SELECT * FROM Batting NATURAL JOIN Teams WHERE playerID = '$player'";
+	$battingData = $conn->query($battingQuery);
+
+	$fieldingQuery = "SELECT year, name, position, fieldingGames, assists, errors, doublePlays FROM Fielding NATURAL JOIN Teams WHERE playerID = '$player'";
+	$fieldingData = $conn->query($fieldingQuery);
+	
+	$HOFQuery = "SELECT year, inducted, category FROM HallOfFame WHERE playerID = '$player'";
+	$HOFData = $conn->query($HOFQuery);
+
+	$outfieldersQuery = "SELECT year, leftField, centerField, rightField FROM Outfielders WHERE playerID = '$player'";
+	$outfieldersData = $conn->query($outfieldersData);
+
+	$pitchingQuery = "SELECT year, name, wins, losses, pitchingGames, gamesStarted, completeGames, shutouts, saves, hits, earnedRuns, HR, BB, strikeouts, opponentsBattingAverage, ERA, runs FROM Pitching NATURAL JOIN Teams WHERE playerID = '$player'";
+	$pitchingData = $conn->query($pitchingQuery);
+
+	$salaryQuery = "SELECT year, name, salary FROM Salaries NATURAL JOIN Teams WHERE playerID = '$player'";
+	$salaryData = $conn->query($salaryQuery);
+
+	$commentsQuery = "SELECT comment, cID FROM Comments WHERE playerID = '$player'";
+	$commentsData = $conn->query($commentsQuery);
 ?>
 
 
@@ -93,9 +113,68 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small"><?php echo $playerDataRow['nameFirst'] . " " . $playerDataRow['nameLast'] ?></h1>
-    <img src="https://wallpapercave.com/wp/xQdR1ot.jpg" alt="boy" class="w3-image" width="2000" height="1108">
+    <h2 class="w3-large"><span class="w3-hide-small"><?php echo $playerDataRow['birthCountry']. "  " . $playerDataRow['weight'] . "lbs.  " . $playerDataRow['height'] . "in.  Bats: " . $playerDataRow['bats'] . "    Throws: " . $playerDataRow['throws'] ?></h2>
+    <?php echo "<a href = 'comment.php?id=".$playerDataRow["playerID"]."'>ADD COMMENT</a><br>";?>
   </header>
-  
+
+<div class="w3-content w3-medium w3-justify w3-text-grey w3-padding-32">
+<?php
+	if($AllstarData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Allstar Stats</h2><?php ;
+	while($AllstarDataRow = $AllstarData->fetch_assoc()){?>
+		<p><?php echo $AllstarDataRow['year'] . " " . $AllstarDataRow['name'] . ";     Starting position: " . $AllstarDataRow['positionName'] ?></p><?php ;  
+	}
+	}
+
+	if($battingData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Batting Stats</h2><?php ;
+	while($battingDataRow = $battingData->fetch_assoc()){?>
+		<p><?php echo $battingDataRow['year'] . " " . $battingDataRow['name'] . ";  Games: " . $battingDataRow['battingGames'] . ", At Bats: " . $battingDataRow['atBats'] . ", Runs: " . $battingDataRow['runs'] . ", Hits: " . $battingDataRow['hits'] . ", 2B: ". $battingDataRow['doubles'] . ", 3B: " . $battingDataRow['triples'] . ", HR: " . $battingDataRow['HR'] . ", RBI: " . $battingDataRow['RBI'] . ", Stolen Bases: " . $battingDataRow['stolenBases'] . ", Walks: " . $battingDataRow['BB'] . ", Strikeouts: " . $battingDataRow['strikeouts'] ?></p><?php ;
+	}
+	}
+
+	if($fieldingData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Fielding Stats</h2><?php ;
+	while($fieldingDataRow = $fieldingData->fetch_assoc()){?>
+		<p><?php echo $fieldingDataRow['year'] . " " . $fieldingDataRow['name'] . "; Position: " . $fieldingDataRow['position'] . ", Games: " . $fieldingDataRow['fieldingGames'] . ", Assists: " . $fieldingDataRow['assists'] . ", Errors: " . $fieldingDataRow['errors'] . ", Double Plays: " . $fieldingDataRow['doublePlays'] ?></p><?php ;
+	}
+	}
+
+	if($HOFData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Hall of Fame</h2><?php ;
+	while($HOFDataRow= $HOFData->fetch_assoc()){?>
+		<p><?php echo $HOFDataRow['year'] . ", Inducted (Y/N): " . $HOFDataRow['inducted'] . ", Category: " . $HOFDataRow['category'] ?></p><?php ;
+	}
+	}
+
+	if($pitchingData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Pitching Stats</h2><?php ;
+	while($pitchingDataRow = $pitchingData->fetch_assoc()){?>
+		<p><?php echo $pitchingDataRow['year'] . " " . $pitchingDataRow['name'] . "; Wins: " . $pitchingDataRow['wins'] . ", Losses: " . $pitchingDataRow['losses'] . ", Games: " . $pitchingDataRow['pitchingGames'] . ", Games Started: " . $pitchingDataRow['gamesStarted'] . ", Complete Games: " . $pitchingDataRow['completeGames'] . ", Shutouts: " . $pitchingDataRow['shutouts'] . ", Saves: " . $pitchingDataRow['saves'] . ", Hits: " . $pitchingDataRow['hits'] . ", Earned Runs: " . $pitchingDataRow['earnedRuns'] . ", HR Given Up: " . $pitchingDataRow['HR'] . ", Walks Given Up: " . $pitchingDataRow['BB'] . ", Strikeouts: " . $pitchingDataRow['strikeouts'] . ", Opponents AVG: " . $pitchingDataRow['opponentsBattingAverage'] . ", ERA: " . $pitchingDataRow['ERA'] . ", Runs: " . $pitchingDataRow['runs'] ?></p><?php ;
+	}
+	}
+	
+	if($salaryData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Salaries</h2><?php ;
+	while($salaryDataRow = $salaryData->fetch_assoc()){?>
+	<p><?php echo $salaryDataRow['year'] . " " . $salaryDataRow['name'] . " Salary: $" . $salaryDataRow['salary'] ?></p><?php ;
+	}
+	}
+
+	if($commentsData->num_rows>0){?>
+		<h2 class="w3-text-light-grey">Comments</h2><?php ;
+	while($commentsDataRow=$commentsData->fetch_assoc()){?>
+	<p><?php echo $commentsDataRow['comment']?></p><?php ;
+	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '9'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0){
+	echo "<a href = 'deleteComment.php?id=".$commentsDataRow['cID']."&p_id=".$playerDataRow["playerID"]."'>Delete Comment</a><br>";
+	}
+	}
+	}
+
+?>
+</div>  
     <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
     <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>

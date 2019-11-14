@@ -6,18 +6,9 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
-
+$player = $_GET['id'];
 include_once("./library.php");
-	 if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
-    } else {
-	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
-	$result = $conn->query($sql);
-	if ($result->num_rows == 0){
-	header("Location: index.php");
-	 }}
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -36,22 +27,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 110px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 </style>
 <body class="w3-black">
 
@@ -62,7 +37,7 @@ tr:nth-child(even) {
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="search_index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="search.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-search w3-xxlarge"></i>
     <p>SEARCH</p>
   </a>
@@ -75,18 +50,13 @@ tr:nth-child(even) {
     <p>LEADERBOARD</p>
   </a>
   <?php
-	$SERVER = 'cs4750.cs.virginia.edu';
-	$USERNAME = 'reg3dq';
-	$PASSWORD = 'Databases2019';
-	$DATABASE = 'reg3dq';
-	$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	 if (mysqli_connect_error()) {
         die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
     } else {
 	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){?>
-	<a href = "admin.php" class = "w3-bar-item w3-button w3-padding-large w3-black">
+	<a href = "admin.php" class = "w3-bar-item w3-button w3-padding-large w3-hover-black">
 	<i class = "fa fa-address-book-o w3-xxlarge"></i>
 	<p>MANAGE ADMINS</p>
 	</a>
@@ -106,33 +76,27 @@ tr:nth-child(even) {
     <a href="#leaderboard" class="w3-bar-item w3-button" style="width:25% !important">LEADERBOARD</a>
   </div>
 </div>
+
+<?php
+	$playerDataQuery = "SELECT * FROM Players WHERE playerID = '$player'";
+	$playerData = $conn->query($playerDataQuery);
+	$playerDataRow = $playerData->fetch_assoc();
+?>
+
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
-<header class="w3-container w3-padding-32 w3-center w3-black">
-<h1 class = "w3-jumbo">Manage Admins</h1>
-<header class = "w3-content w3-padding-64 w3-black w3-xlarge">
-  <?php
-	$sql = "SELECT * FROM user_role WHERE username!= '$username'";
-	$result = $conn->query($sql);
-	if($result->num_rows > 0) {
-		while ($row=$result->fetch_assoc()){
-			echo $row["username"] . ": " ;
-			if ($row["role_id"] == 1){
-				echo "<a href = 'makeAdmin.php?id=".$row["username"]."'>(make admin)</a><br>";
-			}
-			else{
-				echo "<a href = 'deleteAdmin.php?id=".$row["username"]."'>(remove admin)</a><br>";
-			}
-		}
-	}
-	else{
-		echo "No accounts to manage";
-	}
-	$conn->close();
-  ?>
-</header>
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small"><?php echo $playerDataRow['nameFirst'] . " " . $playerDataRow['nameLast'] ?></h1>
+    <h2 class="w3-large"><span class="w3-hide-small"><?php echo $playerDataRow['birthCountry']. "  " . $playerDataRow['weight'] . "lbs.  " . $playerDataRow['height'] . "in.  Bats: " . $playerDataRow['bats'] . "    Throws: " . $playerDataRow['throws'] ?></h2>
   
+<form action="addComment.php?id=<?php echo "$player";?>" method="post">
+	Enter your comment here:<br>
+	<textarea rows = "5" cols = "50" name="comment" id="comment"></textarea></br>
+	<input type="Submit", value="Submit", name="Submit">
+</form>
+</header>
+</div>  
     <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
     <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>
@@ -141,7 +105,6 @@ tr:nth-child(even) {
   </footer>
 
 <!-- END PAGE CONTENT -->
-</div>
 </div>
 
 </body>
