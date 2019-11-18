@@ -108,8 +108,9 @@ th, td {
         </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
-$firstname = filter_input(INPUT_POST, 'firstname');
-if (!empty($firstname)) {
+if (!empty($firstname) && empty($lastname)) {
+  // Create Connection
+  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
   if (mysqli_connect_error()) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
@@ -134,7 +135,35 @@ if (!empty($firstname)) {
           echo "No Results found!";
       }
       $conn->close();
-  }
+    }
+  } elseif (empty($firstname) && !empty($lastname)) {
+    // Create Connection
+    $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+    if (mysqli_connect_error()) {
+        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
+    } else {
+        $sql = "SELECT * FROM Players WHERE nameLast = '$lastname'";
+        $result = $conn->query($sql);
+      if($result->num_rows > 0){
+        echo "<table>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "<th>Votes</th>";
+        echo "<th>Vote!</th>";
+        echo "</tr>";
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["nameFirst"] . " " . $row["nameLast"] ."</td>";
+            echo "<td>" . $row["votes"] . "</td>";
+            echo "<td><a href = 'userVote.php?id=".$row["playerID"]."'>(Vote!)</a></td>";
+            echo "</tr>";
+          }
+        echo "</table>";
+      } else {
+          echo "No Results found!";
+      }
+      $conn->close();
+    }
 } else {
   die();
 }
