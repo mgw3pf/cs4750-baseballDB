@@ -47,14 +47,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>LEADERBOARD</p>
   </a>
 <?php
-	$SERVER = 'cs4750.cs.virginia.edu';
-	$USERNAME = 'reg3dq';
-	$PASSWORD = 'Databases2019';
-	$DATABASE = 'reg3dq';
-	$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-	 if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
-    } else {
+	include_once("./library.php");
 	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){?>
@@ -62,7 +55,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	<i class = "fa fa-address-book-o w3-xxlarge"></i>
 	<p>MANAGE ADMINS</p>
 	</a>
-	<?php }}?>
+	<?php }?>
   <a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-times-circle-o w3-xxlarge"></i>
     <p>LOG OUT</p>
@@ -88,7 +81,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
             <option value="BB">Walks</option>
             <option value="stolenBases">Stolen Bases</option>
         </select>
-        <input type="Submit", value="Stat", name="Stat">
+        <input type="Submit", value="Search", name="Stat">
 	    <input type="Submit", value = "Export to CSV", name="Export">
     </form>
 

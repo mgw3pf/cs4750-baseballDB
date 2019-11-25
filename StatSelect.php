@@ -87,14 +87,7 @@ th, td {
     <p>LEADERBOARD</p>
   </a>
   <?php
-	$SERVER = 'cs4750.cs.virginia.edu';
-	$USERNAME = 'reg3dq';
-	$PASSWORD = 'Databases2019';
-	$DATABASE = 'reg3dq';
-	$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-	 if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
-    } else {
+	include_once("./library.php");
 	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){?>
@@ -102,7 +95,7 @@ th, td {
 	<i class = "fa fa-address-book-o w3-xxlarge"></i>
 	<p>MANAGE ADMINS</p>
 	</a>
-	<?php }}?>
+	<?php }?>
   <a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-times-circle-o w3-xxlarge"></i>
     <p>LOG OUT</p>
@@ -132,20 +125,11 @@ th, td {
     </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-// include_once("library.php")
+include_once("./library.php");
 $tail = filter_input(INPUT_POST, 'tail');
 $quantity = filter_input(INPUT_POST, 'quantity');
 $stats = filter_input(INPUT_POST, 'stats');
 if (!empty($quantity)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-  if (mysqli_connect_error()) {
-      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-  } else {
       if ($tail == "greater") {
         $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` > $quantity ORDER BY `SUM($stats)` DESC";
       } elseif ($tail == "fewer") {
@@ -174,7 +158,7 @@ if (!empty($quantity)) {
         echo "No Results found!";
       }
       $conn->close();
-  }
+  
 } else {
   echo "Please enter a stat quantity!";
   die();
