@@ -36,7 +36,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="search.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="search_index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-search w3-xxlarge"></i>
     <p>SEARCH</p>
   </a>

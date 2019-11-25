@@ -1,23 +1,11 @@
 <?PHP
-session_start();
-if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
-	header("Location: login.php");
+  session_start();
+  if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
+	  header("Location: index.php");}
+  if (isset($_SESSION['username'])){
+	  $username = $_SESSION['username'];
 }
-if (isset($_SESSION['username'])){
-	$username = $_SESSION['username'];
-}
-
-include_once("./library.php");
-	 if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
-    } else {
-	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
-	$result = $conn->query($sql);
-	if ($result->num_rows == 0){
-	header("Location: index.php");
-	 }}
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -36,33 +24,17 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 110px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 </style>
 <body class="w3-black">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <p> Welcome, <?php session_start(); echo $_SESSION['username'];?>!</p>
+<p> Welcome, <?php session_start(); echo $_SESSION['username'];?>!</p>
   <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="search_index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="search_index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-search w3-xxlarge"></i>
     <p>SEARCH</p>
   </a>
@@ -74,7 +46,7 @@ tr:nth-child(even) {
     <i class="fa fa-diamond w3-xxlarge"></i>
     <p>LEADERBOARD</p>
   </a>
-  <?php
+<?php
 	$SERVER = 'cs4750.cs.virginia.edu';
 	$USERNAME = 'reg3dq';
 	$PASSWORD = 'Databases2019';
@@ -86,7 +58,7 @@ tr:nth-child(even) {
 	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){?>
-	<a href = "admin.php" class = "w3-bar-item w3-button w3-padding-large w3-black">
+	<a href = "admin.php" class = "w3-bar-item w3-button w3-padding-large w3-hover-black">
 	<i class = "fa fa-address-book-o w3-xxlarge"></i>
 	<p>MANAGE ADMINS</p>
 	</a>
@@ -97,43 +69,51 @@ tr:nth-child(even) {
 </a>
 </nav>
 
-<!-- Navbar on small screens (Hidden on medium and large screens) -->
-<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-    <a href="#search" class="w3-bar-item w3-button" style="width:25% !important">SEARCH</a>
-    <a href="#vote" class="w3-bar-item w3-button" style="width:25% !important">VOTE</a>
-    <a href="#leaderboard" class="w3-bar-item w3-button" style="width:25% !important">LEADERBOARD</a>
-  </div>
-</div>
 <!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-<header class="w3-container w3-padding-32 w3-center w3-black">
-<h1 class = "w3-jumbo">Manage Admins</h1>
-<header class = "w3-content w3-padding-64 w3-black w3-xlarge">
-  <?php
-	$sql = "SELECT * FROM user_role WHERE username!= '$username'";
-	$result = $conn->query($sql);
-	if($result->num_rows > 0) {
-		while ($row=$result->fetch_assoc()){
-			echo $row["username"] . ": " ;
-			if ($row["role_id"] == 1){
-				echo "<a href = 'makeAdmin.php?id=".$row["username"]."'>(make admin)</a><br>";
-			}
-			else{
-				echo "<a href = 'deleteAdmin.php?id=".$row["username"]."'>(remove admin)</a><br>";
-			}
-		}
-	}
-	else{
-		echo "No accounts to manage";
-	}
-	$conn->close();
-  ?>
-</header>
-  
-    <!-- Footer -->
+<div class="w3-padding-large w3-center" id="main">
+
+    <h1>Search for Baseball Players based on Career Statistics</h1>
+    <br> 
+    <form action="StatSelect.php" method="post">
+        Select all players that have
+        <select name="tail">
+            <option value="greater">more than</option>
+            <option value="fewer">fewer than</option>
+            <option value="equal">exactly</option>
+        </select>
+        <input type="number" name="quantity" id="quantity" min="0" max="10000">
+        <select name="stats">
+            <option value="HR">Home Runs</option>
+            <option value="RBI">Runs Batted In</option>
+            <option value="BB">Walks</option>
+            <option value="stolenBases">Stolen Bases</option>
+        </select>
+        <input type="Submit", value="Stat", name="Stat">
+	    <input type="Submit", value = "Export to CSV", name="Export">
+    </form>
+
+
+<!--
+    <h1><strong>Search by Career Statistics</strong></h1>
+    <br>
+    <ul>
+        <li><h2><a href="stat_hr.php">Home Runs</a></h2></li>
+        <li><h2><a href="stat_rbi.php">Runs Batted In</a></h2></li>
+        <li><h2><a href="stat_avg.php">Batting Average</a></h2></li>
+        <li><h2><a href="stat_bb.php">Bases on Balls</a></h2></li>
+    </ul>
+
+    <h1>Search for Baseball Players by Statistics</h1>
+        <BR>
+        <form action="PlayerSelect.php" method="post">
+            First Name: <input type="text" name="firstname" id="firstname">
+            Last Name: <input type="text" name="lastname">
+            <input type="Submit", value="Search", name="Search">
+	    <input type="Submit", value = "Export to CSV", name="Export">
+    </form>
+    -->
+
+ <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
     <p class="w3-medium">Thanks to <a href="http://www.seanlahman.com/baseball-archive/statistics/" target="_blank" class="w3-hover-text-green">Lahman's Database</a></p>
     <p class="w3-medium">Website by Robyn Guarriello, Mike Wood, Tate Haga, Aria Kumar, and Galen Palowitch
@@ -141,7 +121,6 @@ tr:nth-child(even) {
   </footer>
 
 <!-- END PAGE CONTENT -->
-</div>
 </div>
 
 </body>

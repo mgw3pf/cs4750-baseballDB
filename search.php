@@ -1,9 +1,9 @@
 <?PHP
-session_start();
-if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
-	header("Location: index.php");}
-if (isset($_SESSION['username'])){
-	$username = $_SESSION['username'];
+  session_start();
+  if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
+	  header("Location: index.php");}
+  if (isset($_SESSION['username'])){
+	  $username = $_SESSION['username'];
 }
 ?>
 
@@ -34,7 +34,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="search.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="search_index.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-search w3-xxlarge"></i>
     <p>SEARCH</p>
   </a>
@@ -68,13 +68,14 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
   
-    <h1>Search for Baseball Players by First Name!</h1>
-        <BR>
-        <form action="PlayerSelect.php" method="post">
-            First Name: <input type="text" name="firstname" id="firstname">
-            <!-- Last Name: <input type="text" name="lastname"> -->
-            <input type="Submit", value="Search", name="Search">
-	    <input type="Submit", value = "Export to CSV", name="Export">
+  <h1>Search for Baseball Players by First and/or Last Name!</h1>
+  <BR>
+  <form action="PlayerSelect.php" method="post">
+    First Name: <input type="text" name="firstname" id="firstname">
+    Last Name: <input type="text" name="lastname" id="lastname">
+    <!-- Last Name: <input type="text" name="lastname"> -->
+    <input type="Submit", value="Search", name="Search">
+	  <input type="Submit", value = "Export to CSV", name="Export">
 	</form>
 
  <!-- Footer -->
