@@ -6,19 +6,21 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-// include_once("library.php")
-$firstname = filter_input(INPUT_POST, 'firstname');
-if (!empty($firstname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+include_once("./library.php");
+$tail = filter_input(INPUT_POST, 'tail');
+$quantity = filter_input(INPUT_POST, 'quantity');
+$stats = filter_input(INPUT_POST, 'stats');
+if (!empty($quantity)) {
   if (mysqli_connect_error()) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
-      $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
+       if ($tail == "greater") {
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` > $quantity ORDER BY `SUM($stats)` DESC";
+      } elseif ($tail == "fewer") {
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` < $quantity ORDER BY `SUM($stats)` DESC";
+      } else {
+        $sql = "SELECT * FROM (SELECT SUM($stats), nameFirst, nameLast, playerID FROM Players NATURAL JOIN Batting GROUP BY playerID) AS CAREER HAVING `SUM($stats)` = $quantity ORDER BY `SUM($stats)` DESC";
+      }
       $result = $conn->query($sql);
 if($result->num_rows > 0){
 if($_POST["Export"]){
@@ -27,7 +29,7 @@ header('Content-Disposition: attachment; filename=results.csv');
               $output = fopen("php://output", "w");
 	      $delimiter = ',';
 while($row = $result->fetch_assoc()){
-			$lineData = array($row["nameFirst"], $row["nameLast"]);
+			$lineData = array($row["nameFirst"], $row["nameLast"], $row["playerID"], $row["SUM($stats)"]);
 			fputcsv($output, $lineData, $delimiter);
 		}
 	      exit();
@@ -40,7 +42,7 @@ while($row = $result->fetch_assoc()){
 <html>
 <title>Baseball Database</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" cointent="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
