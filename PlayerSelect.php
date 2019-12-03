@@ -109,7 +109,7 @@ th, td {
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
   
-    <h1>Search for Baseball Players by First Name!</h1>
+    <h1>Search for Baseball Players by Name!</h1>
         <BR>
         <form action="PlayerSelect.php" method="post">
             First Name: <input type="text" name="firstname">
