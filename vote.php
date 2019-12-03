@@ -109,8 +109,7 @@ th, td {
         </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
-include_once("./library.php");
-$firstname = filter_input(INPUT_POST, 'firstname');
+#$firstname = filter_input(INPUT_POST, 'firstname');
 $lastname = filter_input(INPUT_POST, 'lastname');
 
 if (!empty($firstname) && empty($lastname)) {
@@ -197,6 +196,7 @@ if (!empty($firstname) && empty($lastname)) {
       }
       $conn->close();
 } else {
+  echo "Please enter a first or last name!";
   die();
 }
 ?>
