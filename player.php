@@ -166,9 +166,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 	if($pitchingData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Pitching Stats</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Wins</th><th>Losses</th><th>Games</th><th>Games Started</th><th>CG</th><th>Shutouts</th><th>Saves</th><th>Hits</th><th>ER</th><th>HR against</th><th>BB</th><th>SO</th><th>Opp. Avg.</th><th>ERA</th><th>Runs</th></tr>";
 	while($pitchingDataRow = $pitchingData->fetch_assoc()){?>
-		<p><?php echo $pitchingDataRow['year'] . " " . $pitchingDataRow['name'] . "; Wins: " . $pitchingDataRow['wins'] . ", Losses: " . $pitchingDataRow['losses'] . ", Games: " . $pitchingDataRow['pitchingGames'] . ", Games Started: " . $pitchingDataRow['gamesStarted'] . ", Complete Games: " . $pitchingDataRow['completeGames'] . ", Shutouts: " . $pitchingDataRow['shutouts'] . ", Saves: " . $pitchingDataRow['saves'] . ", Hits: " . $pitchingDataRow['hits'] . ", Earned Runs: " . $pitchingDataRow['earnedRuns'] . ", HR Given Up: " . $pitchingDataRow['HR'] . ", Walks Given Up: " . $pitchingDataRow['BB'] . ", Strikeouts: " . $pitchingDataRow['strikeouts'] . ", Opponents AVG: " . $pitchingDataRow['opponentsBattingAverage'] . ", ERA: " . $pitchingDataRow['ERA'] . ", Runs: " . $pitchingDataRow['runs'] ?></p><?php ;
+		<?php echo "<tr><td>" . $pitchingDataRow['year'] . "</td><td>" . $pitchingDataRow['name'] . "</td><td>" . $pitchingDataRow['wins'] . "</td><td>" . $pitchingDataRow['losses'] . "</td><td>" . $pitchingDataRow['pitchingGames'] . "</td><td>" . $pitchingDataRow['gamesStarted'] . "</td><td>" . $pitchingDataRow['completeGames'] . "</td><td>" . $pitchingDataRow['shutouts'] . "</td><td>" . $pitchingDataRow['saves'] . "</td><td>" . $pitchingDataRow['hits'] . "</td><td>" . $pitchingDataRow['earnedRuns'] . "</td><td>" . $pitchingDataRow['HR'] . "</td><td>" . $pitchingDataRow['BB'] . "</td><td>" . $pitchingDataRow['strikeouts'] . "</td><td>" . $pitchingDataRow['opponentsBattingAverage'] . "</td><td>" . $pitchingDataRow['ERA'] . "</td><td>" . $pitchingDataRow['runs'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table>";
 	}
 	
 	if($salaryData->num_rows>0){?>
