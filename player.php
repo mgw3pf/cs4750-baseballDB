@@ -151,7 +151,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	while($fieldingDataRow = $fieldingData->fetch_assoc()){?>
 		<?php echo "<tr><td>" . $fieldingDataRow['year'] . "</td><td>" . $fieldingDataRow['name'] . "</td><td>" . $fieldingDataRow['position'] . "</td><td>" . $fieldingDataRow['fieldingGames'] . "</td><td>" . $fieldingDataRow['assists'] . "</td><td>" . $fieldingDataRow['errors'] . "</td><td>" . $fieldingDataRow['doublePlays'] . "</td></tr>" ?><?php ;
 	}
-	echo "</table";
+	echo "</table>";
 	}
 
 	if($HOFData->num_rows>0){?>
