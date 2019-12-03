@@ -18,6 +18,11 @@ $player = $_GET['id'];
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
+table, th, td {
+  border: 1px solid white;
+}
+
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
 /* Set the width of the sidebar to 120px */
@@ -121,44 +126,62 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <?php
 	if($AllstarData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Allstar Stats</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Starting Position</th></tr>";
 	while($AllstarDataRow = $AllstarData->fetch_assoc()){?>
-		<p><?php echo $AllstarDataRow['year'] . " " . $AllstarDataRow['name'] . ";     Starting position: " . $AllstarDataRow['positionName'] ?></p><?php ;  
+		<?php echo "<tr><td>" . $AllstarDataRow['year'] . "</td><td>" . $AllstarDataRow['name'] . "</td><td>" . $AllstarDataRow['positionName'] . "</td></tr>" ?><?php ;  
 	}
+	echo "</table>";
 	}
 
 	if($battingData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Batting Stats</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Games</th><th>At Bats</th><th>Runs</th><th>Hits</th><th>2B</th><th>3B</th><th>HR</th><th>RBI</th><th>SB</th><th>BB</th><th>SO</th></tr>";
 	while($battingDataRow = $battingData->fetch_assoc()){?>
-		<p><?php echo $battingDataRow['year'] . " " . $battingDataRow['name'] . ";  Games: " . $battingDataRow['battingGames'] . ", At Bats: " . $battingDataRow['atBats'] . ", Runs: " . $battingDataRow['runs'] . ", Hits: " . $battingDataRow['hits'] . ", 2B: ". $battingDataRow['doubles'] . ", 3B: " . $battingDataRow['triples'] . ", HR: " . $battingDataRow['HR'] . ", RBI: " . $battingDataRow['RBI'] . ", Stolen Bases: " . $battingDataRow['stolenBases'] . ", Walks: " . $battingDataRow['BB'] . ", Strikeouts: " . $battingDataRow['strikeouts'] ?></p><?php ;
+		<?php echo "<tr><td>" . $battingDataRow['year'] . "</td><td>" . $battingDataRow['name'] . "</td><td>" . $battingDataRow['battingGames'] . "</td><td>" . $battingDataRow['atBats'] . "</td><td>" . $battingDataRow['runs'] . "</td><td>" . $battingDataRow['hits'] . "</td><td>". $battingDataRow['doubles'] . "</td><td>" . $battingDataRow['triples'] . "</td><td>" . $battingDataRow['HR'] . "</td><td>" . $battingDataRow['RBI'] . "</td><td>" . $battingDataRow['stolenBases'] . "</td><td>" . $battingDataRow['BB'] . "</td><td>" . $battingDataRow['strikeouts'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table>";
 	}
 
 	if($fieldingData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Fielding Stats</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Position</th><th>Games</th><th>Assists</th><th>Errors</th><th>Double Plays</th></tr>";
 	while($fieldingDataRow = $fieldingData->fetch_assoc()){?>
-		<p><?php echo $fieldingDataRow['year'] . " " . $fieldingDataRow['name'] . "; Position: " . $fieldingDataRow['position'] . ", Games: " . $fieldingDataRow['fieldingGames'] . ", Assists: " . $fieldingDataRow['assists'] . ", Errors: " . $fieldingDataRow['errors'] . ", Double Plays: " . $fieldingDataRow['doublePlays'] ?></p><?php ;
+		<?php echo "<tr><td>" . $fieldingDataRow['year'] . "</td><td>" . $fieldingDataRow['name'] . "</td><td>" . $fieldingDataRow['position'] . "</td><td>" . $fieldingDataRow['fieldingGames'] . "</td><td>" . $fieldingDataRow['assists'] . "</td><td>" . $fieldingDataRow['errors'] . "</td><td>" . $fieldingDataRow['doublePlays'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table>";
 	}
 
 	if($HOFData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Hall of Fame</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Inducted (Y/N)</th><th>Category</th></tr>";
 	while($HOFDataRow= $HOFData->fetch_assoc()){?>
-		<p><?php echo $HOFDataRow['year'] . ", Inducted (Y/N): " . $HOFDataRow['inducted'] . ", Category: " . $HOFDataRow['category'] ?></p><?php ;
+		<?php echo "<tr><td>" . $HOFDataRow['year'] . "</td><td>" . $HOFDataRow['inducted'] . "</td><td>" . $HOFDataRow['category'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table>";
 	}
 
 	if($pitchingData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Pitching Stats</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Wins</th><th>Losses</th><th>Games</th><th>Games Started</th><th>CG</th><th>Shutouts</th><th>Saves</th><th>Hits</th><th>ER</th><th>HR against</th><th>BB</th><th>SO</th><th>Opp. Avg.</th><th>ERA</th><th>Runs</th></tr>";
 	while($pitchingDataRow = $pitchingData->fetch_assoc()){?>
-		<p><?php echo $pitchingDataRow['year'] . " " . $pitchingDataRow['name'] . "; Wins: " . $pitchingDataRow['wins'] . ", Losses: " . $pitchingDataRow['losses'] . ", Games: " . $pitchingDataRow['pitchingGames'] . ", Games Started: " . $pitchingDataRow['gamesStarted'] . ", Complete Games: " . $pitchingDataRow['completeGames'] . ", Shutouts: " . $pitchingDataRow['shutouts'] . ", Saves: " . $pitchingDataRow['saves'] . ", Hits: " . $pitchingDataRow['hits'] . ", Earned Runs: " . $pitchingDataRow['earnedRuns'] . ", HR Given Up: " . $pitchingDataRow['HR'] . ", Walks Given Up: " . $pitchingDataRow['BB'] . ", Strikeouts: " . $pitchingDataRow['strikeouts'] . ", Opponents AVG: " . $pitchingDataRow['opponentsBattingAverage'] . ", ERA: " . $pitchingDataRow['ERA'] . ", Runs: " . $pitchingDataRow['runs'] ?></p><?php ;
+		<?php echo "<tr><td>" . $pitchingDataRow['year'] . "</td><td>" . $pitchingDataRow['name'] . "</td><td>" . $pitchingDataRow['wins'] . "</td><td>" . $pitchingDataRow['losses'] . "</td><td>" . $pitchingDataRow['pitchingGames'] . "</td><td>" . $pitchingDataRow['gamesStarted'] . "</td><td>" . $pitchingDataRow['completeGames'] . "</td><td>" . $pitchingDataRow['shutouts'] . "</td><td>" . $pitchingDataRow['saves'] . "</td><td>" . $pitchingDataRow['hits'] . "</td><td>" . $pitchingDataRow['earnedRuns'] . "</td><td>" . $pitchingDataRow['HR'] . "</td><td>" . $pitchingDataRow['BB'] . "</td><td>" . $pitchingDataRow['strikeouts'] . "</td><td>" . $pitchingDataRow['opponentsBattingAverage'] . "</td><td>" . $pitchingDataRow['ERA'] . "</td><td>" . $pitchingDataRow['runs'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table>";
 	}
 	
 	if($salaryData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Salaries</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Salary</th></tr>";
 	while($salaryDataRow = $salaryData->fetch_assoc()){?>
-	<p><?php echo $salaryDataRow['year'] . " " . $salaryDataRow['name'] . " Salary: $" . $salaryDataRow['salary'] ?></p><?php ;
+		<?php echo "<tr><td>" . $salaryDataRow['year'] . "</td><td>" . $salaryDataRow['name'] . "</td><td>" . $salaryDataRow['salary'] . "</td></tr>" ?></p><?php ;
 	}
+	echo "</table>";
 	}
 
 	if($commentsData->num_rows>0){?>
