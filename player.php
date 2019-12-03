@@ -133,8 +133,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 				<th>Starting Position</th>
 				</tr>";
 	while($AllstarDataRow = $AllstarData->fetch_assoc()){?>
-		<tr><?php echo "<td>" . $AllstarDataRow['year'] . "</td><td>" . $AllstarDataRow['name'] . "</td><td>" . $AllstarDataRow['positionName'] . "</td>" ?></tr></table><?php ;  
+		<tr><?php echo "<td>" . $AllstarDataRow['year'] . "</td><td>" . $AllstarDataRow['name'] . "</td><td>" . $AllstarDataRow['positionName'] . "</td>" ?></tr><?php ;  
 	}
+	echo "</table>";
 	}
 
 	if($battingData->num_rows>0){?>
