@@ -146,9 +146,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 	if($fieldingData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Fielding Stats</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Position</th><th>Games</th><th>Assists</th><th>Errors</th><th>Double Plays</th></tr>";
 	while($fieldingDataRow = $fieldingData->fetch_assoc()){?>
-		<p><?php echo $fieldingDataRow['year'] . " " . $fieldingDataRow['name'] . "; Position: " . $fieldingDataRow['position'] . ", Games: " . $fieldingDataRow['fieldingGames'] . ", Assists: " . $fieldingDataRow['assists'] . ", Errors: " . $fieldingDataRow['errors'] . ", Double Plays: " . $fieldingDataRow['doublePlays'] ?></p><?php ;
+		<?php echo "<tr><td>" . $fieldingDataRow['year'] . "</td><td>" . $fieldingDataRow['name'] . "</td><td>" . $fieldingDataRow['position'] . "</td><td>" . $fieldingDataRow['fieldingGames'] . "</td><td>" . $fieldingDataRow['assists'] . "</td><td>" . $fieldingDataRow['errors'] . "</td><td>" . $fieldingDataRow['doublePlays'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table";
 	}
 
 	if($HOFData->num_rows>0){?>
