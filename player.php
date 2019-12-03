@@ -141,6 +141,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	while($battingDataRow = $battingData->fetch_assoc()){?>
 		<?php echo "<tr><td>" . $battingDataRow['year'] . "</td><td>" . $battingDataRow['name'] . "</td><td>" . $battingDataRow['battingGames'] . "</td><td>" . $battingDataRow['atBats'] . "</td><td>" . $battingDataRow['runs'] . "</td><td>" . $battingDataRow['hits'] . "</td><td>". $battingDataRow['doubles'] . "</td><td>" . $battingDataRow['triples'] . "</td><td>" . $battingDataRow['HR'] . "</td><td>" . $battingDataRow['RBI'] . "</td><td>" . $battingDataRow['stolenBases'] . "</td><td>" . $battingDataRow['BB'] . "</td><td>" . $battingDataRow['strikeouts'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table>";
 	}
 
 	if($fieldingData->num_rows>0){?>
