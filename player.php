@@ -127,7 +127,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	if($AllstarData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Allstar Stats</h2><?php ;
 		echo "<table>";
-		echo "<tr><th>Year</th><th>Name</th><th>Starting Position</th></tr>";
+		echo "<tr><th>Year</th><th>Team</th><th>Starting Position</th></tr>";
 	while($AllstarDataRow = $AllstarData->fetch_assoc()){?>
 		<?php echo "<tr><td>" . $AllstarDataRow['year'] . "</td><td>" . $AllstarDataRow['name'] . "</td><td>" . $AllstarDataRow['positionName'] . "</td></tr>" ?><?php ;  
 	}
@@ -136,8 +136,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 	if($battingData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Batting Stats</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Games</th><th>At Bats</th><th>Runs</th><th>Hits</th><th>2B</th><th>3B</th><th>HR</th><th>RBI</th><th>SB</th><th>BB</th><th>SO</th></tr>";
 	while($battingDataRow = $battingData->fetch_assoc()){?>
-		<p><?php echo $battingDataRow['year'] . " " . $battingDataRow['name'] . ";  Games: " . $battingDataRow['battingGames'] . ", At Bats: " . $battingDataRow['atBats'] . ", Runs: " . $battingDataRow['runs'] . ", Hits: " . $battingDataRow['hits'] . ", 2B: ". $battingDataRow['doubles'] . ", 3B: " . $battingDataRow['triples'] . ", HR: " . $battingDataRow['HR'] . ", RBI: " . $battingDataRow['RBI'] . ", Stolen Bases: " . $battingDataRow['stolenBases'] . ", Walks: " . $battingDataRow['BB'] . ", Strikeouts: " . $battingDataRow['strikeouts'] ?></p><?php ;
+		<?php echo "<tr><td>" . $battingDataRow['year'] . "</td><td>" . $battingDataRow['name'] . "</td><td>" . $battingDataRow['battingGames'] . "</td><td>" . $battingDataRow['atBats'] . "</td><td>" . $battingDataRow['runs'] . "</td><td>" . $battingDataRow['hits'] . "</td><td>". $battingDataRow['doubles'] . "</td><td>" . $battingDataRow['triples'] . "</td><td>" . $battingDataRow['HR'] . "</td><td>" . $battingDataRow['RBI'] . "</td><td>" . $battingDataRow['stolenBases'] . "</td><td>" . $battingDataRow['BB'] . "</td><td>" . $battingDataRow['strikeouts'] . "</td></tr>" ?><?php ;
 	}
 	}
 
