@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
 session_start();
 if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 	header("Location: login.php");
@@ -100,23 +98,18 @@ th, td {
 </nav>
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
-    <h1>Vote for your favorite players!</h1>
-    <h2>Search for Baseball Players by Name!</h2>
+    <h1>Vote for Your Favorite Players!</h1>
+    <h2>Search for players by first name!</h2>
         <BR>
         <form action="vote.php" method="post">
             First Name: <input type="text" name="firstname">
-            Last Name: <input type="text" name="lastname">
+            <!-- Last Name: <input type="text" name="lastname"> -->
             <input type="Submit", value = "Search", name="Search">
-	          <input type="Submit", value = "Export to CSV", name="Export">
         </form>
  <div class="w3-content w3-justify w3-black w3-padding-64">
 <?php
-#$firstname = filter_input(INPUT_POST, 'firstname');
-$lastname = filter_input(INPUT_POST, 'lastname');
-
-if (!empty($firstname) && empty($lastname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+$firstname = filter_input(INPUT_POST, 'firstname');
+if (!empty($firstname)) {
   if (mysqli_connect_error()) {
       die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
   } else {
@@ -141,64 +134,8 @@ if (!empty($firstname) && empty($lastname)) {
           echo "No Results found!";
       }
       $conn->close();
-    }
-  } elseif (empty($firstname) && !empty($lastname)) {
-    // Create Connection
-    $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-    if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-    } else {
-        $sql = "SELECT * FROM Players WHERE nameLast = '$lastname'";
-        $result = $conn->query($sql);
-      if($result->num_rows > 0){
-        echo "<table>";
-        echo "<tr>";
-        echo "<th>Name</th>";
-        echo "<th>Votes</th>";
-        echo "<th>Vote!</th>";
-        echo "</tr>";
-        while($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["nameFirst"] . " " . $row["nameLast"] ."</td>";
-            echo "<td>" . $row["votes"] . "</td>";
-            echo "<td><a href = 'userVote.php?id=".$row["playerID"]."'>(Vote!)</a></td>";
-            echo "</tr>";
-          }
-        echo "</table>";
-      } else {
-          echo "No Results found!";
-      }
-      $conn->close();
-    }
-}elseif (!empty($firstname) && !empty($lastname)) {
-    // Create Connection
-    $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-    if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-    } else {
-        $sql = "SELECT * FROM Players WHERE namefirst = '$firstname' INTERSECT SELECT * FROM Players WHERE nameLast = '$lastname'";
-        $result = $conn->query($sql);
-      if($result->num_rows > 0){
-        echo "<table>";
-        echo "<tr>";
-        echo "<th>Name</th>";
-        echo "<th>Votes</th>";
-        echo "<th>Vote!</th>";
-        echo "</tr>";
-        while($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["nameFirst"] . " " . $row["nameLast"] ."</td>";
-            echo "<td>" . $row["votes"] . "</td>";
-            echo "<td><a href = 'userVote.php?id=".$row["playerID"]."'>(Vote!)</a></td>";
-            echo "</tr>";
-          }
-        echo "</table>";
-      } else {
-          echo "No Results found!";
-      }
-      $conn->close();
+  }
 } else {
-  echo "Please enter a first or last name!";
   die();
 }
 ?>
