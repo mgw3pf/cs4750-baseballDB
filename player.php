@@ -121,8 +121,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <?php
 	if($AllstarData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Allstar Stats</h2><?php ;
+		echo "<tr>
+				<th>Year</th>
+				<th>Name</th>
+				<th>Starting Position</th>
+				</tr>";
 	while($AllstarDataRow = $AllstarData->fetch_assoc()){?>
-		<p><?php echo $AllstarDataRow['year'] . " " . $AllstarDataRow['name'] . ";     Starting position: " . $AllstarDataRow['positionName'] ?></p><?php ;  
+		<tr><?php echo "<td>" . $AllstarDataRow['year'] . "</td><td>" . $AllstarDataRow['name'] . "</td><td>" . $AllstarDataRow['positionName'] . "</td>" ?></tr><?php ;  
 	}
 	}
 
