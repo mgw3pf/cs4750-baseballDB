@@ -8,9 +8,17 @@ if (isset($_SESSION['username'])){
 }
 include_once("./library.php");
 $firstname = filter_input(INPUT_POST, 'firstname');
-if (!empty($firstname)) {
+$lastname = filter_input(INPUT_POST, 'lastname');
+if (!empty($firstname)&&empty($lastname)) {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
-      $result = $conn->query($sql);
+      $result = $conn->query($sql);}
+elseif (empty($firstname) && !empty($lastname)) {
+      $sql = "SELECT * FROM Players WHERE namelast = '$lastname'";
+      $result = $conn->query($sql);}
+else{
+	$sql = "SELECT * FROM Players WHERE namefirst='$firstname' AND namelast='$lastname'";
+	$result=$conn->query($sql);
+}
 if($result->num_rows > 0){
 if($_POST["Export"]){
               header('Content-Type: text/csv; charset=utf-8');
@@ -23,7 +31,7 @@ while($row = $result->fetch_assoc()){
 		}
 	      exit();
         
-}
+
 }
 }
 ?>
