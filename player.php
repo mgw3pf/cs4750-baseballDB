@@ -156,9 +156,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 	if($HOFData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Hall of Fame</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Inducted (Y/N)</th><th>Category</th></tr>";
 	while($HOFDataRow= $HOFData->fetch_assoc()){?>
-		<p><?php echo $HOFDataRow['year'] . ", Inducted (Y/N): " . $HOFDataRow['inducted'] . ", Category: " . $HOFDataRow['category'] ?></p><?php ;
+		<?php echo "<tr><td>" . $HOFDataRow['year'] . "</td><td>" . $HOFDataRow['inducted'] . "</td><td>" . $HOFDataRow['category'] . "</td></tr>" ?><?php ;
 	}
+	echo "</table>";
 	}
 
 	if($pitchingData->num_rows>0){?>
