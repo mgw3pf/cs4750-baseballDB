@@ -6,20 +6,19 @@ if(!(isset($_SESSION['login']) && $_SESSION['login']!='')){
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
-$SERVER = 'cs4750.cs.virginia.edu';
-$USERNAME = 'reg3dq';
-$PASSWORD = 'Databases2019';
-$DATABASE = 'reg3dq';
-// include_once("library.php")
+include_once("./library.php");
 $firstname = filter_input(INPUT_POST, 'firstname');
-if (!empty($firstname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-  if (mysqli_connect_error()) {
-      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-  } else {
+$lastname = filter_input(INPUT_POST, 'lastname');
+if (!empty($firstname)&&empty($lastname)) {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
-      $result = $conn->query($sql);
+      $result = $conn->query($sql);}
+elseif (empty($firstname) && !empty($lastname)) {
+      $sql = "SELECT * FROM Players WHERE namelast = '$lastname'";
+      $result = $conn->query($sql);}
+else{
+	$sql = "SELECT * FROM Players WHERE namefirst='$firstname' AND namelast='$lastname'";
+	$result=$conn->query($sql);
+}
 if($result->num_rows > 0){
 if($_POST["Export"]){
               header('Content-Type: text/csv; charset=utf-8');
@@ -31,8 +30,8 @@ while($row = $result->fetch_assoc()){
 			fputcsv($output, $lineData, $delimiter);
 		}
 	      exit();
-        }
-}
+        
+
 }
 }
 ?>
@@ -85,14 +84,6 @@ th, td {
     <p>LEADERBOARD</p>
   </a>
   <?php
-	$SERVER = 'cs4750.cs.virginia.edu';
-	$USERNAME = 'reg3dq';
-	$PASSWORD = 'Databases2019';
-	$DATABASE = 'reg3dq';
-	$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-	 if (mysqli_connect_error()) {
-        die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error()); 
-    } else {
 	$sql = "SELECT * FROM user_role NATURAL JOIN roles NATURAL JOIN role_perm NATURAL JOIN permissions WHERE username = '$username' AND perm_id = '3'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){?>
@@ -100,7 +91,7 @@ th, td {
 	<i class = "fa fa-address-book-o w3-xxlarge"></i>
 	<p>MANAGE ADMINS</p>
 	</a>
-	<?php }}?>
+	<?php }?>
   <a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-times-circle-o w3-xxlarge"></i>
     <p>LOG OUT</p>
@@ -109,7 +100,7 @@ th, td {
 <!-- Page Content -->
 <div class="w3-padding-large w3-center" id="main">
   
-    <h1>Search for Baseball Players by Name!</h1>
+    <h1>Search for Baseball Players by First Name!</h1>
         <BR>
         <form action="PlayerSelect.php" method="post">
             First Name: <input type="text" name="firstname">
@@ -123,11 +114,6 @@ include_once("./library.php");
 $firstname = filter_input(INPUT_POST, 'firstname');
 $lastname = filter_input(INPUT_POST, 'lastname');
 if (!empty($firstname) && empty($lastname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-  if (mysqli_connect_error()) {
-      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-  } else {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
@@ -147,13 +133,8 @@ if (!empty($firstname) && empty($lastname)) {
         echo "No Results found!";
       }
       $conn->close();
-  }
+  
 } elseif (empty($firstname) && !empty($lastname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-  if (mysqli_connect_error()) {
-      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-  } else {
       $sql = "SELECT * FROM Players WHERE nameLast = '$lastname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
@@ -172,13 +153,8 @@ if (!empty($firstname) && empty($lastname)) {
         echo "No Results found!";
       }
       $conn->close();
-  }  
+    
 } elseif (!empty($firstname) && !empty($lastname)) {
-  // Create Connection
-  $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-  if (mysqli_connect_error()) {
-      die('Connect Error ('. mysqli_connect_errno() .')'. mysqli_connect_error());
-  } else {
       $sql = "SELECT * FROM Players WHERE namefirst = '$firstname' INTERSECT SELECT * FROM Players WHERE nameLast = '$lastname'";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
@@ -197,7 +173,7 @@ if (!empty($firstname) && empty($lastname)) {
         echo "No Results found!";
       }
       $conn->close();
-  }
+  
 } else {
   echo "Please enter a First or Last Name!";
   die();
