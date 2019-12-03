@@ -176,9 +176,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 	
 	if($salaryData->num_rows>0){?>
 		<h2 class="w3-text-light-grey">Salaries</h2><?php ;
+		echo "<table>";
+		echo "<tr><th>Year</th><th>Team</th><th>Salary</th></tr>";
 	while($salaryDataRow = $salaryData->fetch_assoc()){?>
-	<p><?php echo $salaryDataRow['year'] . " " . $salaryDataRow['name'] . " Salary: $" . $salaryDataRow['salary'] ?></p><?php ;
+		<?php echo "<tr><td>" . $salaryDataRow['year'] . "</td><td>" . $salaryDataRow['name'] . "</td><td>" . $salaryDataRow['salary'] . "</td></tr>" ?></p><?php ;
 	}
+	echo "</table>";
 	}
 
 	if($commentsData->num_rows>0){?>
